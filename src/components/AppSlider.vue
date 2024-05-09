@@ -54,7 +54,7 @@ export default {
 
 <template>
   <div
-    class="slider-wrapper"
+    class="slider-wrapper d-flex justify-content-between"
     tabindex="0"
     @mouseover="stopAutoPlay()"
     @mouseleave="setAutoPlay()"
@@ -81,9 +81,13 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/general.scss";
 
+.slider-wrapper {
+  height: 300px;
+}
+
 .item {
   float: left;
-  width: 700px;
+  flex-grow: 1;
   height: 300px;
   position: relative;
 }

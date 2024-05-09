@@ -39,33 +39,27 @@ export default {
 
 <template>
   <main>
-    <div class="container">
-      <form class="d-flex flex-column gap-4" @submit.prevent="submitSearch">
-        <h1 class="mt-5 align-self-center">Trova il tua alloggio ideale</h1>
-        <label for="address" class="form-label align-self-center fs-3"
-          >Cerca un indirizzo</label
-        >
-        <input
-          type="text"
-          class="form-control w-50 align-self-center"
-          id="address"
-          v-model="search.address"
-        />
-        <button
-          type="submit"
-          class="btn btn-outline-dark align-self-center mt-5 mb-5"
-        >
-          Cerca
-        </button>
-      </form>
-      <h4 class="text-center mb-5">Alcuni appartamenti consigliati da noi:</h4>
-      <app-slider />
-    </div>
+    <form class="d-flex flex-column gap-4" @submit.prevent="submitSearch">
+      <h1 class="mt-5 align-self-center">Trova il tua alloggio ideale</h1>
+      <label for="address" class="form-label align-self-center fs-3"
+        >Cerca un indirizzo</label
+      >
+      <input
+        type="text"
+        class="form-control w-50 align-self-center"
+        id="address"
+        v-model="search.address"
+      />
+      <button
+        type="submit"
+        class="btn btn-outline-dark align-self-center mt-5 mb-5"
+      >
+        Cerca
+      </button>
+    </form>
+    <h4 class="text-center mb-5">Alcuni appartamenti consigliati da noi:</h4>
+    <app-slider />
   </main>
 </template>
 
-<style lang="scss" scoped>
-main {
-  height: 90vh;
-}
-</style>
+<style lang="scss" scoped></style>
