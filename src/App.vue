@@ -34,6 +34,6 @@ export default {
 @use "./styles/general.scss";
 
 .page-container {
-  background-color: var(--main-color);
+  background-color: var(--white);
 }
 </style>

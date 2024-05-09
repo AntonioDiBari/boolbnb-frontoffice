@@ -36,7 +36,7 @@ export default {
 @use "../styles/general.scss";
 
 .navbar {
-  background-color: var(--rose-red);
+  background-color: var(--main-color);
   height: 13vh;
 }
 

@@ -23,7 +23,6 @@ export default {
 
 <style lang="scss" scoped>
 footer {
-  background-color: var(--rose-red);
-  height: 7vh;
+  background-color: var(--main-color);
 }
 </style>
