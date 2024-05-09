@@ -7,35 +7,29 @@ import AppMain from "./components/AppMain.vue";
 import AppFooter from "./components/AppFooter.vue";
 
 export default {
-    data() {
-        return {};
-    },
+  data() {
+    return {};
+  },
 
-
-    props: {},
-    methods: {},
-    components: { AppHeader, AppMain, AppFooter },
+  props: {},
+  methods: {},
+  components: { AppHeader, AppMain, AppFooter },
 };
 </script>
 
 <template>
-    <div class="page-container">
-
-        <app-header />
-        <div class="container my-3">
-            <app-main />
-            <!-- <apartment-list /> -->
-        </div>
-        <app-footer />
-    </div>
-
+  <div class="page-container">
+    <app-header />
+    <app-main />
+    <!-- <apartment-list /> -->
+    <app-footer />
+  </div>
 </template>
 
 <style lang="scss">
 @use "./styles/general.scss";
 
 .page-container {
-    background-color: #76dcf8;
-    padding: 20px;
+  background-color: #5500186e;
 }
 </style>
