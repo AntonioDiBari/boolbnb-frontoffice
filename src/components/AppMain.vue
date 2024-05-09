@@ -1,5 +1,6 @@
 <script>
 import { store } from "../store";
+import AppSlider from "./AppSlider.vue";
 
 export default {
   data() {
@@ -31,6 +32,8 @@ export default {
       console.log(this.search);
     },
   },
+
+  components: { AppSlider },
 };
 </script>
 
@@ -55,12 +58,14 @@ export default {
           Cerca
         </button>
       </form>
+      <h4 class="text-center mb-5">Alcuni appartamenti consigliati da noi:</h4>
+      <app-slider />
     </div>
   </main>
 </template>
 
 <style lang="scss" scoped>
 main {
-  height: 80vh;
+  height: 90vh;
 }
 </style>
