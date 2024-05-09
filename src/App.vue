@@ -28,12 +28,6 @@ export default {
 
     <app-footer />
   </div>
-  <app-header />
-  <div class="page-container">
-    <app-main />
-    <!-- <apartment-list /> -->
-    <app-footer />
-  </div>
 </template>
 
 <style lang="scss">
