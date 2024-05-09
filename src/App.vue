@@ -22,13 +22,15 @@ export default {
     <div class="page-container">
 
         <app-header />
+
         <div class="container my-3">
             <app-main />
-            <!-- <apartment-list /> -->
+            <router-view></router-view>
+
         </div>
+
         <app-footer />
     </div>
-
 </template>
 
 <style lang="scss">
