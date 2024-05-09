@@ -1,5 +1,6 @@
 <script>
 import { store } from "../store";
+import axios from "axios";
 
 export default {
   data() {
@@ -43,11 +44,20 @@ export default {
       }
       console.log(this.images);
     },
+
+    fetchApartments() {
+      axios
+        .get("http://127.0.0.1:8000/api/apartment-sponsor")
+        .then((result) => {
+          console.log(result.data);
+        });
+    },
   },
 
   mounted() {
     this.setAutoPlay();
     this.fillImgsArray();
+    this.fetchApartments();
   },
 };
 </script>

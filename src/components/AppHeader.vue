@@ -13,9 +13,10 @@ export default {
 <template>
   <header class="navbar navbar-expand-lg">
     <div class="d-flex w-100 justify-content-around">
-      <router-link to="/">
+      <a href="http://127.0.0.1:8000/register">
         <img class="img-fluid logo" src="../assets/logo.png" alt="" />
-      </router-link>
+      </a>
+
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/registrati" class="btn btn-outline-dark"
