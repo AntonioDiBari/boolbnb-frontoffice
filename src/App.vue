@@ -18,8 +18,8 @@ export default {
 </script>
 
 <template>
+  <app-header />
   <div class="page-container">
-    <app-header />
     <app-main />
     <!-- <apartment-list /> -->
     <app-footer />
@@ -30,6 +30,6 @@ export default {
 @use "./styles/general.scss";
 
 .page-container {
-  background-color: #5500186e;
+  background-color: var(--main-color);
 }
 </style>

@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <header class="navbar navbar-expand-lg navbar-light">
+  <header class="navbar navbar-expand-lg">
     <div class="d-flex w-100 justify-content-around">
       <router-link to="/">
         <img class="img-fluid logo" src="../assets/logo.png" alt="" />
@@ -33,6 +33,12 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@use "../styles/general.scss";
+
+.navbar {
+  background-color: var(--rose-red);
+}
+
 .text-pink {
   color: #ff4081;
 }

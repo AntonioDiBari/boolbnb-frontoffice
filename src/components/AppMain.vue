@@ -37,7 +37,7 @@ export default {
 <template>
   <main>
     <div class="container">
-      <form @submit.prevent="submitSearch" class="search-form">
+      <form @submit.prevent="submitSearch">
         <div>
           <h3>Trova il tua alloggio ideale</h3>
         </div>
