@@ -18,6 +18,16 @@ export default {
 </script>
 
 <template>
+  <div class="page-container">
+    <app-header />
+
+    <div class="container my-3">
+      <app-main />
+      <router-view></router-view>
+    </div>
+
+    <app-footer />
+  </div>
   <app-header />
   <div class="page-container">
     <app-main />
