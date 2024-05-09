@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  <footer class="bg-dark text-white">
+  <footer class="text-white">
     <div class="d-flex justify-content-between">
       <div>
         <p class="h6">&copy; BOOLBNB, TEAM 4</p>
@@ -21,4 +21,9 @@ export default {
   </footer>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+footer {
+  background-color: var(--rose-red);
+  height: 7vh;
+}
+</style>
