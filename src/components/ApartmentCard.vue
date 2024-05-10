@@ -7,7 +7,7 @@ export default {
 <template>
   <div class="col">
     <div class="card h-100">
-      <div class="apartment-item">
+      <div class="apartment-item h-100">
         <div class="apartment-content">
           <img
             v-if="apartment.img"
@@ -43,7 +43,6 @@ export default {
   background-color: var(--main-color);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
 }
 
 .apartment-content {
