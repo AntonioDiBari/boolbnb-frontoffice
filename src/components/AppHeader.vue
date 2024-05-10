@@ -13,19 +13,16 @@ export default {
 <template>
   <header class="navbar navbar-expand-lg">
     <div class="d-flex w-100 justify-content-around">
-      <a href="http://127.0.0.1:8000/register">
-        <img class="img-fluid logo" src="../assets/logo.png" alt="" />
-      </a>
-
+      <img class="img-fluid logo" src="../assets/logo.png" alt="" />
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link to="/registrati" class="btn btn-outline-dark"
-            >Registrati</router-link
+          <a href="http://127.0.0.1:8000/register" class="btn btn-outline-dark"
+            >Registrati</a
           >
         </li>
         <li class="nav-item">
-          <router-link to="/login" class="btn btn-outline-dark"
-            >Login</router-link
+          <a href="http://127.0.0.1:8000/login" class="btn btn-outline-dark"
+            >Accedi</a
           >
         </li>
       </ul>
@@ -54,7 +51,7 @@ export default {
 }
 
 .logo {
-  width: 70%;
+  width: 100px;
   mix-blend-mode: multiply;
 }
 
