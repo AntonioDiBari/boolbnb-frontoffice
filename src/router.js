@@ -3,14 +3,15 @@ import { createRouter, createWebHistory } from "vue-router";
 import ApartmentList from "./pages/ApartmentList.vue";
 import AppMain from "./components/AppMain.vue";
 import AdvancedSearch from "./components/AdvancedSearch.vue";
+import Homepage from "./pages/Homepage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
-      name: "main",
-      component: AppMain,
+      name: "homepage",
+      component: Homepage,
     },
     {
       path: "/apartment-search",
