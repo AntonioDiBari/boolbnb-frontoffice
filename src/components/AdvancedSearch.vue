@@ -52,6 +52,7 @@ export default {
     <div class="input-group mb-3">
       <input
         type="text"
+        :placeholder="store.addressSearch"
         v-model="searchText"
         class="form-control"
         aria-label="Sizing example input"
