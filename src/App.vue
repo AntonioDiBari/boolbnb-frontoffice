@@ -1,6 +1,6 @@
 <script>
 import AppHeader from "./components/AppHeader.vue";
-// import AppMain from "./components/AppMain.vue";
+import AppMain from "./components/AppMain.vue";
 
 import AppFooter from "./components/AppFooter.vue";
 
@@ -11,7 +11,7 @@ export default {
 
   props: {},
   methods: {},
-  components: { AppHeader, AppFooter },
+  components: { AppHeader, AppFooter, AppMain },
 };
 </script>
 
@@ -20,7 +20,7 @@ export default {
     <app-header />
 
     <div class="container my-3">
-      <router-view></router-view>
+      <app-main></app-main>
     </div>
 
     <app-footer />

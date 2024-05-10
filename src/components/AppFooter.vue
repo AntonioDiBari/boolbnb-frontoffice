@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  <footer class="text-white">
+  <footer class="text-white p-4">
     <div class="d-flex justify-content-between">
       <div>
         <p class="h6">&copy; BOOLBNB, TEAM 4</p>
