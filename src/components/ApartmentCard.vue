@@ -8,29 +8,26 @@ export default {
   <div class="col">
     <div class="card h-100">
       <div class="apartment-item h-100">
-        <div class="apartment-content">
-          <img
-            v-if="apartment.img"
-            :src="apartment.img"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <h2 class="title text-light">{{ apartment.title_desc }}</h2>
-            <h5>{{ address }}</h5>
-            <div class="details">
-              <div class="detail">
-                <strong>Rooms: </strong> {{ apartment.n_rooms }}
-              </div>
-              <div class="detail">
-                <strong>Beds: </strong> {{ apartment.n_beds }}
-              </div>
-              <div class="detail">
-                <strong>Bathrooms: </strong> {{ apartment.n_bathrooms }}
+        <router-link :to="'/apartments/' + apartment.id">
+          <div class="apartment-content">
+            <img v-if="apartment.img" :src="apartment.img" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h2 class="title text-light">{{ apartment.title_desc }}</h2>
+              <h5>{{ address }}</h5>
+              <div class="details">
+                <div class="detail">
+                  <strong>Rooms: </strong> {{ apartment.n_rooms }}
+                </div>
+                <div class="detail">
+                  <strong>Beds: </strong> {{ apartment.n_beds }}
+                </div>
+                <div class="detail">
+                  <strong>Bathrooms: </strong> {{ apartment.n_bathrooms }}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
   </div>
