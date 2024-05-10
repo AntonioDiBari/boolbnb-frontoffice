@@ -50,18 +50,21 @@ export default {
 </script>
 
 <template>
-  <advanced-search @search="fetchApartments" />
-  <h1 class="page-title">Lista Appartamenti</h1>
-  <ul class="apartment-list">
-    <div class="row rows-col-3 g-3">
+  <h1></h1>
+  <advanced-search
+    aria-placeholder="Cerca per indirizzo"
+    @search="fetchApartments"
+  />
+  <h2 class="page-title">Lista Appartamenti</h2>
+  <div class="row g-3">
+    <div v-for="(apartment, index) in apartments" class="col-4">
       <ApartmentCard
-        v-for="(apartment, index) in apartments"
         :key="apartment.id"
         :apartment="apartment"
         :address="addresses[index]"
       />
     </div>
-  </ul>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -76,10 +79,5 @@ export default {
   font-size: 36px;
   margin-bottom: 20px;
   text-align: center;
-}
-
-.apartment-list {
-  list-style: none;
-  padding: 0;
 }
 </style>
