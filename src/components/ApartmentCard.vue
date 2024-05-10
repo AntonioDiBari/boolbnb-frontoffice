@@ -27,6 +27,10 @@ export default {
           alt="..."
         />
         <div class="card-body">
+          <router-link
+            :to="{ name: 'apartment-detail', params: { slug: apartment.slug } }"
+            >Info</router-link
+          >
           <h4 class="text-light">{{ getAbstract(apartment.title_desc) }}</h4>
           <span>{{ getAbstract(address) }}</span>
           <div class="details mt-2">
