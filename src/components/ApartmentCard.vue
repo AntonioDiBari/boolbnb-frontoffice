@@ -1,5 +1,17 @@
 <script>
 export default {
+  methods: {
+    getAbstract(string) {
+      let newString;
+      if (string.length >= 15) {
+        newString = string.slice(0, 15) + "...";
+        return newString;
+      } else {
+        return string;
+      }
+    },
+  },
+
   props: { apartment: Object, address: String },
 };
 </script>
@@ -12,23 +24,24 @@ export default {
           <img
             v-if="apartment.img"
             :src="apartment.img"
-            class="card-img-top"
+            class="apartment-image"
             alt="..."
           />
           <div class="card-body">
-            <h2 class="title text-light">{{ apartment.title_desc }}</h2>
-            <h5>{{ address }}</h5>
-            <div class="details">
+            <h4 class="text-light">{{ getAbstract(apartment.title_desc) }}</h4>
+            <span>{{ getAbstract(address) }}</span>
+            <div class="details mt-2">
               <div class="detail">
-                <strong>Rooms: </strong> {{ apartment.n_rooms }}
+                <strong>Stanze: </strong> {{ apartment.n_rooms }}
               </div>
               <div class="detail">
-                <strong>Beds: </strong> {{ apartment.n_beds }}
+                <strong>Letti: </strong> {{ apartment.n_beds }}
               </div>
               <div class="detail">
                 <strong>Bathrooms: </strong> {{ apartment.n_bathrooms }}
               </div>
             </div>
+            <div class="services"></div>
           </div>
         </div>
       </div>
@@ -47,13 +60,14 @@ export default {
 
 .apartment-content {
   padding: 20px;
+  height: 100%;
 }
 
 .apartment-image {
+  object-fit: cover;
   width: 100%;
-  height: auto;
+  height: 200px;
   border-radius: 8px;
-  margin-bottom: 10px;
 }
 
 .title {
