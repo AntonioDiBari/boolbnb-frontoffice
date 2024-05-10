@@ -51,7 +51,7 @@ export default {
 }
 
 .logo {
-  width: 100px;
+  width: 170px;
   mix-blend-mode: multiply;
 }
 
