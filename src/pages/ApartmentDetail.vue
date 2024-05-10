@@ -30,37 +30,37 @@ export default {
 
 <template>
   <div class="container">
-    <h1 class="page-title">{{ apartment.title_desc }}</h1>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="apartment-image">
-          <img
-            v-if="apartment.img"
-            :src="apartment.img"
-            class="card-img-top"
-            alt="..."
+    <div class="header-apartment px-4 mb-4">
+      <h1 class="page-title">{{ apartment.title_desc }}</h1>
+      <p>
+        <strong><font-awesome-icon icon="fa-solid fa-location-dot" /></strong>
+        {{ address[0] }}
+      </p>
+    </div>
+
+    <div class="apartment-image d-flex px-4">
+      <img v-if="apartment.img" :src="apartment.img" alt="..." />
+    </div>
+
+    <div class="row g-3 px-4 mt-2 justify-content-center">
+      <div v-for="service in apartment.services" :key="service" class="col-2">
+        <div class="service d-flex gap-3">
+          <font-awesome-icon
+            class="align-self-center fs-4"
+            :icon="`fa-solid fa-${service.logo}`"
           />
-        </div>
-        <div class="apartment-info">
-          <p><strong>Indirizzo:</strong> {{ address[0] }}</p>
-          <p><strong>Stanze:</strong> {{ apartment.n_rooms }}</p>
-          <p><strong>Letti:</strong> {{ apartment.n_beds }}</p>
-          <p><strong>Bagni:</strong> {{ apartment.n_bathroom }}</p>
-          <p><strong>Mt²:</strong> {{ apartment.square_mts }}</p>
-          <!-- <p><strong>Posizione:</strong> {{ }}</p> -->
+          <span class="align-self-center">{{ service.name }}</span>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="apartment-services">
-          <p><strong>Servizi:</strong></p>
-          <ul>
-            <li v-for="service in apartment.services" :key="service">
-              <font-awesome-icon :icon="`fa-solid fa-${service.logo}`" />
-              {{ service.name }}
-            </li>
-          </ul>
-        </div>
-      </div>
+    </div>
+
+    <div class="apartment-info">
+      <p><strong>Stanze:</strong> {{ apartment.n_rooms }}</p>
+      <p><strong>Letti:</strong> {{ apartment.n_beds }}</p>
+      <p><strong>Bagni:</strong> {{ apartment.n_bathrooms }}</p>
+      <p><strong>Mt²:</strong> {{ apartment.square_mts }}</p>
+      <!-- Da inserire in un div apparte con mappa relativa -->
+      <!-- <p><strong>Posizione:</strong> {{ }}</p> -->
     </div>
   </div>
 </template>
@@ -70,17 +70,24 @@ export default {
 
 .container {
   padding-top: 20px;
-  background-color: var(--main-color);
   color: black;
 }
 
+.service {
+  background-color: var(--main-color);
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .page-title {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .apartment-image img {
+  image-rendering: pixelated;
+  object-fit: cover;
   width: 100%;
-  height: auto;
+  height: 400px;
 }
 
 .apartment-info {
