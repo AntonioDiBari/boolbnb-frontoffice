@@ -10,6 +10,10 @@ export default {
       api,
       apartment: [],
       address: "",
+      email: "",
+      body: "",
+      error: {},
+      success: false,
     };
   },
   methods: {
@@ -19,6 +23,59 @@ export default {
         this.apartment = res.data.result;
         this.address = res.data.address;
       });
+    },
+
+    sendContactForm() {
+      let date = new Date();
+      let month =
+        date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1;
+      let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+      let hours =
+        date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+      let minutes =
+        date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+      const fillingData = {
+        email: this.email,
+        sent:
+          date.getFullYear() +
+          "-" +
+          month +
+          "-" +
+          day +
+          " " +
+          hours +
+          ":" +
+          minutes +
+          ":00",
+        body: this.body,
+      };
+      this.errors = {};
+
+      const config = {
+        request: fillingData,
+      };
+
+      axios
+        .post(`${api.baseUrl}message/${this.apartment.id}`, config)
+        .then((response) => {
+          this.success = response.data.success;
+          console.log(response.data);
+
+          // if (this.success) {
+          //   this.resetFields();
+          // } else {
+          //   this.errors = response.data.errors;
+          // }
+        })
+        .catch(function (error) {
+          console.warn(error);
+        });
+    },
+    resetFields() {
+      this.email = "";
+      this.body = "";
     },
   },
   components: {},
@@ -36,6 +93,19 @@ export default {
         <strong><font-awesome-icon icon="fa-solid fa-location-dot" /></strong>
         {{ address[0] }}
       </p>
+      <h5 class="fs-4 m-1">Hosted by:</h5>
+      <p class="fs-5 m-1">
+        {{ apartment.user.name }} {{ apartment.user.surname }}
+      </p>
+      <button
+        type="button"
+        class="btn btn-primary m-1"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+        data-bs-whatever="@getbootstrap"
+      >
+        Contatta
+      </button>
     </div>
 
     <div class="apartment-image d-flex px-4">
@@ -61,6 +131,69 @@ export default {
       <p><strong>Mt²:</strong> {{ apartment.square_mts }}</p>
       <!-- Da inserire in un div apparte con mappa relativa -->
       <!-- <p><strong>Posizione:</strong> {{ }}</p> -->
+    </div>
+  </div>
+  <div
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    class="modal fade"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Nuovo messaggio
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Mail:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                v-model="email"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label"
+                >Messaggio:</label
+              >
+              <textarea
+                class="form-control"
+                id="message-text"
+                v-model="body"
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Chiudi
+          </button>
+          <button
+            @click="this.sendContactForm()"
+            type="button"
+            class="btn btn-primary"
+          >
+            Invia
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
