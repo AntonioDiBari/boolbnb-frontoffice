@@ -51,10 +51,7 @@ export default {
 
 <template>
   <h1></h1>
-  <advanced-search
-    aria-placeholder="Cerca per indirizzo"
-    @search="fetchApartments"
-  />
+  <advanced-search @search="fetchApartments" />
   <h2 class="page-title">Lista Appartamenti</h2>
   <div class="row g-3">
     <div v-for="(apartment, index) in apartments" class="col-4">

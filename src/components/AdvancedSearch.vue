@@ -23,7 +23,31 @@ export default {
       this.allServices = response.data.result;
     });
   },
+  mounted() {
+    this.searchbar();
+  },
   methods: {
+    searchbar() {
+      let options = {
+        searchOptions: {
+          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+          language: "it-IT",
+          limit: 5,
+        },
+        autocompleteOptions: {
+          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+          language: "it-IT",
+        },
+      };
+      let ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
+      let searchBoxHTML = ttSearchBox.getSearchBoxHTML();
+      document.getElementById("searchbox").append(searchBoxHTML);
+      const inputBox = document.querySelector(".tt-search-box-input");
+      inputBox.addEventListener("input", (event) => {
+        this.searchText = event.target.value;
+        // console.log(event);
+      });
+    },
     submitSearch() {
       if (this.search.rooms !== null && this.search.rooms <= 0) {
         alert("Il numero di camere non può essere negativo");
@@ -50,32 +74,28 @@ export default {
 <template>
   <div class="container d-flex">
     <div class="input-group mb-3">
-      <input
+      <!-- <input
         type="text"
         :placeholder="store.addressSearch"
         v-model="searchText"
         class="form-control"
-        aria-label="Sizing example input"
-        aria-describedby="inputGroup-sizing-default"
         @keyup.enter="$emit('search', searchText)"
-      />
+      /> -->
+      <div id="searchbox"></div>
       <button
         class="btn btn-primary"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasExample"
-        aria-controls="offcanvasExample"
       >
         Filtri avanzati
       </button>
+      <button class="btn btn-secondary" @click="$emit('search', searchText)">
+        Cerca
+      </button>
     </div>
   </div>
-  <div
-    class="offcanvas offcanvas-end"
-    tabindex="-1"
-    id="offcanvasExample"
-    aria-labelledby="offcanvasExampleLabel"
-  >
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasExampleLabel">
         Filtri Avanzati
@@ -84,7 +104,6 @@ export default {
         type="button"
         class="btn-close"
         data-bs-dismiss="offcanvas"
-        aria-label="Close"
       ></button>
     </div>
     <div class="offcanvas-body">
