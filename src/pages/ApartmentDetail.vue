@@ -12,7 +12,7 @@ export default {
       address: "",
       email: "",
       body: "",
-      error: {},
+      errors: {},
       success: false,
     };
   },
@@ -53,29 +53,26 @@ export default {
       };
       this.errors = {};
 
-      const config = {
-        request: fillingData,
-      };
-
       axios
-        .post(`${api.baseUrl}message/${this.apartment.id}`, config)
+        .post(`${api.baseUrl}message/${this.apartment.id}`, fillingData)
         .then((response) => {
           this.success = response.data.success;
-          console.log(response.data);
-
-          // if (this.success) {
-          //   this.resetFields();
-          // } else {
-          //   this.errors = response.data.errors;
-          // }
+          if (this.success) {
+            this.resetFields();
+          } else {
+            this.errors = response.data.errors;
+          }
         })
-        .catch(function (error) {
-          console.warn(error);
+        .catch(function () {
+          console.warn("Error in call");
         });
     },
     resetFields() {
       this.email = "";
       this.body = "";
+    },
+    resetSuccess() {
+      this.success = false;
     },
   },
   components: {},
@@ -94,7 +91,7 @@ export default {
         {{ address[0] }}
       </p>
       <h5 class="fs-4 m-1">Hosted by:</h5>
-      <p class="fs-5 m-1">
+      <p class="fs-5 m-1" v-if="apartment.user">
         {{ apartment.user.name }} {{ apartment.user.surname }}
       </p>
       <button
@@ -103,6 +100,7 @@ export default {
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
         data-bs-whatever="@getbootstrap"
+        @click="this.resetSuccess()"
       >
         Contatta
       </button>
@@ -138,12 +136,10 @@ export default {
     data-bs-backdrop="static"
     class="modal fade"
     tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
+        <div v-if="!success" class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">
             Nuovo messaggio
           </h1>
@@ -151,19 +147,20 @@ export default {
             type="button"
             class="btn-close"
             data-bs-dismiss="modal"
-            aria-label="Close"
           ></button>
         </div>
-        <div class="modal-body">
-          <form>
+        <form action="" method="POST">
+          <div v-if="!success" class="modal-body">
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Mail:</label>
               <input
-                type="text"
+                type="email"
                 class="form-control"
                 id="recipient-name"
                 v-model="email"
+                required
               />
+              <div v-if="errors.email">Inserisci un indirzzo email valido</div>
             </div>
             <div class="mb-3">
               <label for="message-text" class="col-form-label"
@@ -173,24 +170,32 @@ export default {
                 class="form-control"
                 id="message-text"
                 v-model="body"
+                required
               ></textarea>
+              <div v-if="errors.body">Il corpo del messaggio è richiesto</div>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Chiudi
-          </button>
-          <button
-            @click="this.sendContactForm()"
-            type="button"
-            class="btn btn-primary"
-          >
-            Invia
+          </div>
+          <div v-if="!success" class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Chiudi
+            </button>
+            <button
+              @click="this.sendContactForm()"
+              type="submit"
+              class="btn btn-primary"
+            >
+              Invia
+            </button>
+          </div>
+        </form>
+        <div v-if="success" class="modal-footer">
+          <h4 class="text-success">Messaggio mandato correttamente</h4>
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+            Grazie
           </button>
         </div>
       </div>

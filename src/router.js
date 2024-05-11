@@ -24,7 +24,6 @@ const router = createRouter({
       path: "/apartment-detail/:slug",
       name: "apartment-detail",
       component: ApartmentDetail,
-      props: true,
     },
   ],
 });
