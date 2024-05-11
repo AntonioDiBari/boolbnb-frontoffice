@@ -1,17 +1,15 @@
 <script>
-import { store } from "../store";
+import { api } from "../store";
 import axios from "axios";
 
-
-
 export default {
-
   // props:{ApartmentDetail},
 
   data() {
     return {
-      store,
+      api,
       images: [],
+      sponsoredApartments: [],
       activeImg: 0,
       autoplay: false,
     };
@@ -37,88 +35,88 @@ export default {
       this.autoplay = setInterval(() => {
         this.nextSlide();
       }, 3000);
-      
     },
 
     stopAutoPlay() {
       clearInterval(this.autoplay);
     },
 
-    fillImgsArray() {
-      for (let i = 0; i < store.apartments.length; i++) {
-        this.images.push(store.apartments[i].img);
-      }
-      console.log(this.images);
-    },
-
     fetchApartments() {
-  axios
-    .get("http://127.0.0.1:8000/api/apartment-sponsor")
-    .then((response) => {
-      if (response.data.result && Array.isArray(response.data.result.data)) {
-        this.images = response.data.result.data.map(apartment => apartment.img);
-      } else {
-        console.error("formato immagine non valido");
-      }
-    })
-},
+      axios.get(`${api.baseUrl}apartment-sponsor`).then((response) => {
+        if (response.data.result && Array.isArray(response.data.result.data)) {
+          this.images = response.data.result.data.map(
+            (apartment) => apartment.img
+          );
+          this.sponsoredApartments = response.data.result.data;
+        } else {
+          console.error("formato immagine non valido");
+        }
+      });
+    },
   },
 
   mounted() {
-    this.setAutoPlay();
-    this.fillImgsArray();
     this.fetchApartments();
+    this.setAutoPlay();
   },
 };
 </script>
 
 <template>
+  <h4 v-if="sponsoredApartments.length > 0" class="text-center mb-5">
+    Alcuni appartamenti consigliati da noi:
+  </h4>
   <div
-    class="slider-wrapper d-flex justify-content-between "
+    v-if="sponsoredApartments.length > 0"
+    class="slider-wrapper d-flex justify-content-between"
     tabindex="0"
     @mouseover="stopAutoPlay()"
     @mouseleave="setAutoPlay()"
   >
-
-  <div class="item">
-      <!-- <router-link  :to="{ name: 'apartment-detail', params:{ id: apartment.id } }"> -->
+    <div class="item">
+      <router-link
+        :to="{
+          name: 'apartment-detail',
+          params: { slug: sponsoredApartments[activeImg].slug },
+        }"
+      >
         <img :src="images[activeImg]" alt="immagine" />
-      <!-- </router-link> -->
+      </router-link>
     </div>
 
     <div class="thumbs" :style="{ '--thumb-count': images.length }">
-      <div class="prev" @click="prevSlide"><font-awesome-icon icon="arrow-left"/></div>
-      <div class="next" @click="nextSlide"><i class="fa-solid fa-arrow-left"></i></div>
-    
+      <div class="prev" @click="prevSlide"></div>
+      <div class="next" @click="nextSlide"></div>
+
       <img
         v-for="(image, index) in images"
-        :key="index" 
+        :key="index"
         :src="image"
         class="thumb"
-        :class="{ active: index === activeImg, 'first': index === 0, 'last': index === images.length - 1 }"
+        :class="{
+          active: index === activeImg,
+          first: index === 0,
+          last: index === images.length - 1,
+        }"
       />
     </div>
   </div>
 </template>
 
-
-
-
 <style lang="scss" scoped>
 @use "../styles/general.scss";
 
 .slider-wrapper {
-  height: 600px; 
-  
+  height: 600px;
+
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.512);
-     
 }
 
 .item {
   float: left;
   flex-grow: 1;
-  
+
   position: relative;
   cursor: pointer;
 }
@@ -141,13 +139,13 @@ export default {
 
 .thumbs {
   float: left;
- 
+
   width: 200px;
   background: #000;
   position: relative;
   font-size: 0;
 
-  border-radius: 0  20px 20px 0;
+  border-radius: 0 20px 20px 0;
 }
 
 .thumb {
@@ -168,13 +166,12 @@ export default {
   opacity: 1;
 }
 
-.first{
-  
-  border-radius: 0  20px 0 0;
+.first {
+  border-radius: 0 20px 0 0;
 }
 
-.last{
-  border-radius: 0  0 20px 0; 
+.last {
+  border-radius: 0 0 20px 0;
 }
 
 .prev,
