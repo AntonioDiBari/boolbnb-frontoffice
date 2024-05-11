@@ -35,7 +35,7 @@ export default {
 
 .navbar {
   background-color: var(--main-color);
-  height: 13vh;
+  max-height: 10vh;
 }
 
 .text-pink {
