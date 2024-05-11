@@ -1,5 +1,4 @@
 <script>
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { api, store } from "../store";
 import axios from "axios";
 

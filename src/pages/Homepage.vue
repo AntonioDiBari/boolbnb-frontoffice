@@ -32,7 +32,6 @@ export default {
       Cerca
     </router-link>
   </form>
-  <h4 class="text-center mb-5">Alcuni appartamenti consigliati da noi:</h4>
   <app-slider />
 </template>
 
