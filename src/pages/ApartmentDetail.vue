@@ -148,7 +148,7 @@ export default {
             data-bs-dismiss="modal"
           ></button>
         </div>
-        <form action="" method="POST">
+        <form>
           <div v-if="!success" class="modal-body">
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Mail:</label>
@@ -184,7 +184,7 @@ export default {
             </button>
             <button
               @click="this.sendContactForm()"
-              type="submit"
+              type="button"
               class="btn btn-primary"
             >
               Invia
