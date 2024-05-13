@@ -15,8 +15,11 @@ export default {
       body: "",
       errors: {},
       success: false,
+      isLoading: true,
+      myTimeout: null,
     };
   },
+
   methods: {
     fetchApartment() {
       const slug = this.$route.params.slug;
@@ -142,7 +145,7 @@ export default {
       </div>
     </div>
 
-    <div class="apartment-info">
+    <div class="apartment-info p-4 mt-4">
       <p><strong>Stanze:</strong> {{ apartment.n_rooms }}</p>
       <p><strong>Letti:</strong> {{ apartment.n_beds }}</p>
       <p><strong>Bagni:</strong> {{ apartment.n_bathrooms }}</p>
@@ -249,7 +252,7 @@ export default {
 }
 
 .apartment-info {
-  padding: 20px;
+  // padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   #map-div {

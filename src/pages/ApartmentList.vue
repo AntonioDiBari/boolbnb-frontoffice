@@ -4,6 +4,7 @@ import axios from "axios";
 
 import ApartmentCard from "../components/ApartmentCard.vue";
 import AdvancedSearch from "../components/AdvancedSearch.vue";
+import LoadingScreen from "../components/LoadingScreen.vue";
 
 export default {
   data() {
@@ -13,11 +14,13 @@ export default {
       apartments: [],
       services: [],
       addresses: [],
+      isLoading: true,
+      myTimeout: null,
     };
   },
 
   props: [],
-  components: { ApartmentCard, AdvancedSearch },
+  components: { ApartmentCard, AdvancedSearch, LoadingScreen },
 
   methods: {
     fetchApartments(
@@ -46,11 +49,22 @@ export default {
   created() {
     this.fetchApartments();
   },
+
+  mounted() {
+    this.myTimeout = setTimeout(() => {
+      this.isLoading = false;
+    }, 6000);
+  },
+
+  beforeDestroy() {
+    clearTimeout(this.myTimeout);
+  },
 };
 </script>
 
 <template>
-  <h1></h1>
+  <!-- <h1></h1> -->
+  <loading-screen v-if="isLoading" />
   <advanced-search @search="fetchApartments" />
   <h2 class="page-title">Lista Appartamenti</h2>
   <div class="row g-3">
