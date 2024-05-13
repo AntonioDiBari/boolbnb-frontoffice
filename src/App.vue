@@ -21,7 +21,7 @@ export default {
   <div class="page-container">
     <app-header />
 
-    <div class="container my-3">
+    <div class="container my-5">
       <app-main></app-main>
     </div>
 

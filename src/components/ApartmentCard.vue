@@ -17,51 +17,60 @@ export default {
 </script>
 
 <template>
-  <div class="card h-100">
-    <div class="apartment-item h-100">
-      <div class="apartment-content">
-        <img
-          v-if="apartment.img"
-          :src="apartment.img"
-          class="apartment-image"
-          alt="..."
-        />
-        <div class="card-body">
-          <router-link
-            :to="{ name: 'apartment-detail', params: { slug: apartment.slug } }"
-            >Info</router-link
-          >
-          <h4 class="text-light">{{ getAbstract(apartment.title_desc) }}</h4>
-          <span>{{ getAbstract(address) }}</span>
-          <div class="details mt-2">
-            <div class="detail">
-              <strong>Stanze: </strong> {{ apartment.n_rooms }}
+  <router-link
+    :to="{ name: 'apartment-detail', params: { slug: apartment.slug } }"
+  >
+    <div class="card h-100">
+      <div class="apartment-item h-100">
+        <div class="apartment-content">
+          <img
+            v-if="apartment.img"
+            :src="apartment.img"
+            class="apartment-image"
+            alt="..."
+          />
+          <div class="card-body">
+            <h4 class="text-light">{{ getAbstract(apartment.title_desc) }}</h4>
+            <!-- <span>{{ getAbstract(address) }}</span> -->
+            <span>{{ address }}</span>
+            <div class="details mt-2">
+              <div class="detail">
+                <strong>Stanze: </strong> {{ apartment.n_rooms }}
+              </div>
+              <div class="detail">
+                <strong>Letti: </strong> {{ apartment.n_beds }}
+              </div>
+              <div class="detail">
+                <strong>Bathrooms: </strong> {{ apartment.n_bathrooms }}
+              </div>
             </div>
-            <div class="detail">
-              <strong>Letti: </strong> {{ apartment.n_beds }}
+            <div class="services d-flex gap-3 mt-2">
+              <font-awesome-icon
+                v-for="service in apartment.services"
+                :icon="`fa-solid fa-${service.logo}`"
+              />
             </div>
-            <div class="detail">
-              <strong>Bathrooms: </strong> {{ apartment.n_bathrooms }}
-            </div>
-          </div>
-          <div class="services d-flex gap-3 mt-2">
-            <font-awesome-icon
-              v-for="service in apartment.services"
-              :icon="`fa-solid fa-${service.logo}`"
-            />
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/general.scss";
 
+.card {
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  &:hover {
+    opacity: 0.9;
+    transition: 0.5s;
+  }
+}
 .apartment-item {
   background-color: var(--main-color);
-  border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 

@@ -66,7 +66,7 @@ export default {
   <!-- <h1></h1> -->
   <loading-screen v-if="isLoading" />
   <advanced-search @search="fetchApartments" />
-  <h2 class="page-title">Lista Appartamenti</h2>
+  <h2 class="page-title mb-4">Lista Appartamenti</h2>
   <div class="row g-3">
     <div v-for="(apartment, index) in apartments" class="col-4">
       <ApartmentCard
@@ -79,12 +79,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@use "../styles/general.scss";
-
-.container {
-  background-color: var(--main-color);
-  color: var(--gray);
-}
+@use "../styles/partials/_variables.scss" as *;
 
 .page-title {
   font-size: 36px;
