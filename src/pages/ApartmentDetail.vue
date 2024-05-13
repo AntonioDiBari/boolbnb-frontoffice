@@ -1,5 +1,7 @@
 <script>
 import { api, store } from "../store";
+import tt from "@tomtom-international/web-sdk-maps";
+
 import axios from "axios";
 
 export default {
@@ -73,10 +75,29 @@ export default {
     resetSuccess() {
       this.success = false;
     },
+    mapGenerator() {
+      tt.setProductInfo("BoolBnB", "1.0");
+      const map = tt.map({
+        key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+        container: "map-div", // ID del div dove vuoi visualizzare la mappa
+        center: [this.apartment.longitude, this.apartment.latitude], // Coordinate del centro della mappa
+        zoom: 10, // Livello di zoom iniziale
+      });
+      map.addControl(new tt.FullscreenControl());
+      map.addControl(new tt.NavigationControl());
+      const marker = new tt.Marker({})
+        .setLngLat([this.apartment.longitude, this.apartment.latitude])
+        .addTo(map);
+    },
   },
   components: {},
   created() {
     this.fetchApartment();
+  },
+  mounted() {
+    setTimeout(() => {
+      this.mapGenerator();
+    }, 1000);
   },
 };
 </script>
@@ -126,8 +147,8 @@ export default {
       <p><strong>Letti:</strong> {{ apartment.n_beds }}</p>
       <p><strong>Bagni:</strong> {{ apartment.n_bathrooms }}</p>
       <p><strong>Mt²:</strong> {{ apartment.square_mts }}</p>
-      <!-- Da inserire in un div apparte con mappa relativa -->
-      <!-- <p><strong>Posizione:</strong> {{ }}</p> -->
+      <p><strong>Ecco dove trovarci:</strong></p>
+      <div id="map-div"></div>
     </div>
   </div>
   <div
@@ -231,6 +252,12 @@ export default {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  #map-div {
+    margin-top: 10px;
+    border: 1px solid grey;
+    width: 100%;
+    height: 400px;
+  }
 }
 
 .apartment-services {
