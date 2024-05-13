@@ -1,21 +1,34 @@
 <script>
 import { store } from "../store/index";
 import AppSlider from "../components/AppSlider.vue";
+import LoadingScreen from "../components/LoadingScreen.vue";
 
 export default {
   data() {
     return {
       store,
       isLoading: true,
+      myTimeout: null,
     };
   },
   methods: {},
 
   components: { AppSlider, LoadingScreen },
+
+  created() {
+    this.myTimeout = setTimeout(() => {
+      this.isLoading = false;
+    }, 3000);
+  },
+
+  beforeDestroy() {
+    clearTimeout(this.myTimeout);
+  },
 };
 </script>
 
 <template>
+  <loading-screen v-if="isLoading" />
   <form class="d-flex flex-column gap-4" @submit.prevent="submitSearch">
     <h1 class="mt-5 align-self-center">Trova il tua alloggio ideale</h1>
     <label for="address" class="form-label align-self-center fs-3"

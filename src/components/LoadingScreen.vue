@@ -14,9 +14,11 @@ export default {
 #loading {
   position: absolute;
   z-index: 1000;
-  background-color: white;
-  height: 100vh;
-  width: 100vw;
+  background-color: rgb(36, 36, 36);
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
   text-align: center;
   line-height: 100vh;
 }
