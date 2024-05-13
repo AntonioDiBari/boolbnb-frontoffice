@@ -6,11 +6,12 @@ export default {
   data() {
     return {
       store,
+      isLoading: true,
     };
   },
   methods: {},
 
-  components: { AppSlider },
+  components: { AppSlider, LoadingScreen },
 };
 </script>
 

@@ -116,6 +116,8 @@ export default {
 .item {
   float: left;
   flex-grow: 1;
+  object-fit: cover;
+  image-rendering: pixelated;
 
   position: relative;
   cursor: pointer;
