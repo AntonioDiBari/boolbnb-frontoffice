@@ -11,7 +11,7 @@ export default {
   },
   methods: {},
 
-  components: { AppSlider, LoadingScreen },
+  components: { AppSlider },
 };
 </script>
 
