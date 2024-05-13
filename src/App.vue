@@ -2,7 +2,6 @@
 import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
 import AppFooter from "./components/AppFooter.vue";
-import LoadingScreen from "./components/LoadingScreen.vue";
 
 export default {
   data() {
@@ -14,22 +13,11 @@ export default {
 
   props: {},
   methods: {},
-  components: { AppHeader, AppFooter, AppMain, LoadingScreen },
-
-  created() {
-    this.myTimeout = setTimeout(() => {
-      this.isLoading = false;
-    }, 3000);
-  },
-
-  beforeDestroy() {
-    clearTimeout(this.myTimeout);
-  },
+  components: { AppHeader, AppFooter, AppMain },
 };
 </script>
 
 <template>
-  <loading-screen v-if="isLoading" />
   <div class="page-container">
     <app-header />
 
