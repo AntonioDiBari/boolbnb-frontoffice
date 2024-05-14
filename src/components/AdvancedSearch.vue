@@ -2,7 +2,23 @@
 import { api, store } from "../store";
 import axios from "axios";
 
+
+import {
+  faWifi,
+  faSquareParking,
+  faPersonSwimming,
+  faBellConcierge,
+  faHotTubPerson,
+  faWater,
+  faSeedling,
+  faElevator,
+  faPaw,
+  faSnowflake,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
+
 export default {
+
   data() {
     return {
       store,
@@ -13,6 +29,19 @@ export default {
       searchRooms: 1,
       searchRange: 1,
       searchServices: [],
+      serviceIcons: {
+        'WiFi': faWifi,
+        'Posto Macchina': faSquareParking,
+        'Piscina': faPersonSwimming,
+        'Portineria': faBellConcierge,
+        'Sauna': faHotTubPerson,
+        'Vista Mare': faWater,
+        'Giardino': faSeedling,
+        'Ascensore': faElevator,
+        'Animali ammessi': faPaw,
+        'Aria Condizionata': faSnowflake,
+        'Location': faLocationDot,
+      },
     };
   },
 
@@ -67,6 +96,10 @@ export default {
         );
       }
     },
+
+    getServiceIcon(serviceName) {
+      return this.serviceIcons[serviceName] || null;
+    },
   },
 };
 </script>
@@ -100,7 +133,7 @@ export default {
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body p-4">
-      <div class="fs-4">Cerca l'alloggio che fa per te!</div>
+      <div class="fw-bold fs-4">Cerca l'alloggio che fa per te!</div>
       <div class="mt-3 fs-5">
         <label for="range" class="form-label">Raggio di ricerca</label>
         <div class="input-range d-flex gap-2 mb-2">
@@ -117,7 +150,7 @@ export default {
           /> -->
           <div class="range-value">{{ searchRange }}Km</div>
         </div>
-        <div class="row">
+        <div class="row my-3">
           <div class="col-6">
             <label for="beds" class="form-label me-3">N° Letti</label>
             <input class="w-75" v-model="searchBeds" type="number" min="1" max="20" id="beds" name="beds" />
@@ -126,16 +159,21 @@ export default {
             <label for="rooms" class="form-label me-3">N° Stanze</label>
             <input class="w-75" v-model="searchRooms" type="number" min="1" max="50" id="rooms" name="rooms" />
           </div>
-          <label for="" class="my-2">Scegli tra i servizi quale desideri:</label>
-          <div class="col-6" v-for="service in allServices">
+          <label for="" class="fw-bold my-3">Seleziona i servizi che desideri:</label>
+
+          <div class="col-6" v-for="service in allServices" :key="service.id">
             <div v-show="this.allServices.length > 0" class="form-check">
               <input @click="handleServiceClick(service.id)" class="form-check-input" type="checkbox" :id="service.id"
                 :value="service.id" />
+
               <label class="form-check-label" :for="service.id">
+                <font-awesome-icon v-if="getServiceIcon(service.name)" :icon="getServiceIcon(service.name)"
+                  class="me-2" />
                 {{ service.name }}
               </label>
             </div>
           </div>
+
         </div>
         <button @click="
           $emit(
@@ -147,7 +185,7 @@ export default {
             searchServices
           )
           " class="btn btn-modal">
-          Ricerca Avanzata
+          Applica Filtri
         </button>
       </div>
     </div>
@@ -159,6 +197,15 @@ export default {
 
 .container {
   justify-content: center;
+
+  .form-check-label {
+    display: flex;
+    align-items: center;
+
+    .fa-icon {
+      margin-right: 8px;
+    }
+  }
 
   .input-group {
     width: 70%;
@@ -212,7 +259,8 @@ export default {
 
   .offcanvas {
     width: 500px;
-    color: var(--rose-red);
+    color: var(--main-color);
+    background-color: #F0F8FF;
 
     .offcanvas-title {
       color: var(--main-color);
@@ -329,6 +377,11 @@ export default {
     .input-number {
       width: 60px;
     }
+
+    .form-check-input {
+      border-color: #918ec0;
+    }
+
   }
 }
 </style>
