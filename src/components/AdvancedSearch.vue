@@ -8,10 +8,10 @@ export default {
       store,
       api,
       allServices: [],
-      searchText: "",
-      searchBeds: 1,
-      searchRooms: 1,
-      searchRange: 1,
+      searchText: store.addressSearch ?? "",
+      searchBeds: store.bedsSearch ?? 1,
+      searchRooms: store.roomsSearch ?? 1,
+      searchRange: store.rangeSearch ?? 20,
       searchServices: [],
     };
   },
@@ -43,6 +43,7 @@ export default {
       let searchBoxHTML = ttSearchBox.getSearchBoxHTML();
       document.getElementById("searchbox").append(searchBoxHTML);
       const inputBox = document.querySelector(".tt-search-box-input");
+      inputBox.setAttribute("value", store.addressSearch ?? "");
       inputBox.addEventListener("input", (event) => {
         this.searchText = event.target.value;
         // console.log(event);
@@ -112,7 +113,7 @@ export default {
       <div class="fs-4">Cerca l'alloggio che fa per te!</div>
       <div class="mt-3 fs-5">
         <label for="range" class="form-label">Range di ricerca</label>
-        <div class="input-range d-flex gap-2 mb-2">
+        <div class="input-range d-flex gap-1 mb-2">
           <input
             v-model="searchRange"
             type="range"
@@ -121,7 +122,6 @@ export default {
             max="100"
             step="1"
             id="range"
-            value="20"
           />
           <!-- *************** Numero dinamico input range ***************** -->
           <!-- <input
@@ -132,7 +132,7 @@ export default {
             max="100"
             :value="searchRange"
           /> -->
-          <div class="range-value">{{ searchRange }}Km</div>
+          <div class="range-value">{{ searchRange }} Km</div>
         </div>
         <div class="row">
           <div class="col-6">
