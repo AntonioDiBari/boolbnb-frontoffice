@@ -103,7 +103,7 @@ export default {
       />
     </div>
   </div>
-  <div class="text-center mt-5 fs-4 h-all" v-else>Nessun risultato trovato</div>
+  <div class="text-center mt-5 fs-4" v-else>Nessun risultato trovato</div>
 </template>
 
 <style lang="scss" scoped>

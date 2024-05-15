@@ -63,7 +63,7 @@ export default {
 </script>
 
 <template>
-  <h4 v-if="sponsoredApartments.length > 0" class="text-center mb-5">
+  <h4 v-if="sponsoredApartments.length > 0" class="text-center mb-5 fw-bold">
     Alcuni appartamenti consigliati da noi:
   </h4>
   <div
