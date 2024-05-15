@@ -23,6 +23,31 @@ export default {
   components: { ApartmentCard, AdvancedSearch, LoadingScreen },
 
   methods: {
+    clearStore() {
+      (store.addressSearch = ""),
+        (store.roomsSearch = 1),
+        (store.bedsSearch = 1),
+        (store.bathroomsSearch = 1),
+        (store.rangeSearch = 20);
+    },
+
+    fetchApartmentsFirst() {
+      axios
+        .get(api.baseUrl + "apartments", {
+          params: {
+            beds: store.bedsSearch ?? 1,
+            rooms: store.roomsSearch ?? 1,
+            services: [],
+            address: store.addressSearch ?? "",
+            range: store.rangeSearch ?? 20,
+          },
+        })
+        .then((response) => {
+          this.apartments = response.data.result;
+          this.addresses = response.data.addresses;
+        });
+    },
+
     fetchApartments(
       searchText,
       searchRange,
@@ -47,7 +72,8 @@ export default {
     },
   },
   created() {
-    this.fetchApartments();
+    // console.log(store.addressSearch);
+    this.fetchApartmentsFirst();
   },
 
   mounted() {
@@ -56,7 +82,8 @@ export default {
     }, 6000);
   },
 
-  beforeDestroy() {
+  unmounted() {
+    this.clearStore();
     clearTimeout(this.myTimeout);
   },
 };
@@ -67,7 +94,7 @@ export default {
   <loading-screen v-if="isLoading" />
   <advanced-search @search="fetchApartments" />
   <h2 class="page-title mb-4">Lista Appartamenti</h2>
-  <div class="row g-3">
+  <div v-if="apartments.length != 0" class="row g-3">
     <div v-for="(apartment, index) in apartments" class="col-4">
       <ApartmentCard
         :key="apartment.id"
@@ -76,6 +103,7 @@ export default {
       />
     </div>
   </div>
+  <div class="text-center mt-5 fs-4 h-all" v-else>Nessun risultato trovato</div>
 </template>
 
 <style lang="scss" scoped>
@@ -85,5 +113,9 @@ export default {
   font-size: 36px;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.h-all {
+  height: 500px;
 }
 </style>

@@ -7,4 +7,8 @@ export const api = {
 export const store = reactive({
   apartments: [],
   addressSearch: "",
+  roomsSearch: 1,
+  bedsSearch: 1,
+  bathroomsSearch: 1,
+  rangeSearch: 1,
 });

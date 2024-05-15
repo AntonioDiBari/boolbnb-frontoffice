@@ -24,10 +24,10 @@ export default {
       store,
       api,
       allServices: [],
-      searchText: "",
-      searchBeds: 1,
-      searchRooms: 1,
-      searchRange: 1,
+      searchText: store.addressSearch ?? "",
+      searchBeds: store.bedsSearch ?? 1,
+      searchRooms: store.roomsSearch ?? 1,
+      searchRange: store.rangeSearch ?? 20,
       searchServices: [],
       serviceIcons: {
         'WiFi': faWifi,
@@ -72,6 +72,7 @@ export default {
       let searchBoxHTML = ttSearchBox.getSearchBoxHTML();
       document.getElementById("searchbox").append(searchBoxHTML);
       const inputBox = document.querySelector(".tt-search-box-input");
+      inputBox.setAttribute("value", store.addressSearch ?? "");
       inputBox.addEventListener("input", (event) => {
         this.searchText = event.target.value;
         // console.log(event);
@@ -135,10 +136,19 @@ export default {
     <div class="offcanvas-body p-4">
       <div class="fw-bold fs-4">Cerca l'alloggio che fa per te!</div>
       <div class="mt-3 fs-5">
-        <label for="range" class="form-label">Raggio di ricerca</label>
-        <div class="input-range d-flex gap-2 mb-2">
-          <input v-model="searchRange" type="range" class="form-range m-0" min="1" max="100" step="1" id="range"
-            value="20" />
+
+        <label for="range" class="form-label">Range di ricerca</label>
+        <div class="input-range d-flex gap-1 mb-2">
+          <input
+            v-model="searchRange"
+            type="range"
+            class="form-range m-0"
+            min="1"
+            max="100"
+            step="1"
+            id="range"
+          />
+
           <!-- *************** Numero dinamico input range ***************** -->
           <!-- <input
             class="input-number"
@@ -148,7 +158,7 @@ export default {
             max="100"
             :value="searchRange"
           /> -->
-          <div class="range-value">{{ searchRange }}Km</div>
+          <div class="range-value">{{ searchRange }} Km</div>
         </div>
         <div class="row my-3">
           <div class="col-6">
