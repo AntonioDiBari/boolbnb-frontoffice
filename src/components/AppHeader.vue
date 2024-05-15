@@ -11,67 +11,74 @@ export default {
 </script>
 
 <template>
-  <header class="navbar navbar-expand-lg">
-    <div class="container">
-
-      <div class="d-flex w-100 justify-content-between">
-
-        <!-- to do: collegare link -->
-        <router-link to="/">
-          <img class="img-fluid logo" src="../assets/logo.png" alt="" />
-        </router-link>
-
-        <div class="d-flex align-items-center">
-          <h1 class="shadow-text" style="font-size: 5rem;">{{ title }}</h1>
+  <header>
+    <div class="container d-flex justify-content-between">
+      <div class="d-flex">
+        <div class="logo-box d-flex">
+          <img src="../assets/logo.png" alt="logo" />
         </div>
-
-
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a href="http://127.0.0.1:8000/register" class="btn btn-outline-light">Registrati</a>
-          </li>
-          <li class="nav-item">
-            <a href="http://127.0.0.1:8000/login" class="btn btn-outline-light">Accedi</a>
-          </li>
-        </ul>
+        <div class="title align-self-center">{{ this.title }}</div>
+      </div>
+      <div class="login-box gap-2 d-flex align-items-center">
+        <a href="http://127.0.0.1:8000/register">
+          <button class="btn btn-primary fw-bold">Registrati</button></a
+        >
+        <a href="http://127.0.0.1:8000/login">
+          <button class="btn btn-primary fw-bold">Accedi</button></a
+        >
       </div>
     </div>
-
   </header>
+  <!-- // <div class="d-flex">
+//   <a href="http://127.0.0.1:8000/register">
+//     <div class="btn">Registrati</div>
+//   </a>
+//   <a href="http://127.0.0.1:8000/login"
+//     ><div class="btn">Accedi</div></a
+//   >
+// </div> -->
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/general.scss";
 
-
-
-.navbar {
+header {
+  height: 120px;
   background-color: var(--main-color);
-  max-height: 10vh;
-}
+  box-shadow: 0px -2px 3px 4px var(--main-color);
+  background: linear-gradient(
+    180deg,
+    rgba(91, 89, 119, 1) 0%,
+    rgba(122, 119, 161, 1) 26%,
+    rgba(145, 142, 192, 1) 100%
+  );
+  .title {
+    font-size: 60px;
+    font-weight: bold;
+    color: #681736;
+    opacity: 0.9;
+  }
 
+  .logo-box {
+    height: 120px;
+    aspect-ratio: 1;
 
-.text-pink {
-  color: #ff4081;
-}
+    img {
+      mix-blend-mode: multiply;
+      width: 100%;
+      height: 100%;
+    }
+  }
 
-.shadow-text {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.btn {
-  margin: 5px;
-  border-color: var(--gray);
-  background-color: var(--rose-red);
-}
-
-.logo {
-  width: 170px;
-  height: auto;
-  mix-blend-mode: multiply;
-}
-
-li {
-  align-content: center;
+  .login-box {
+    .btn-primary {
+      background-color: #681736;
+      opacity: 0.9;
+      &:hover {
+        background-color: rgb(225, 225, 225);
+        color: var(--rose-red);
+      }
+    }
+  }
 }
 </style>
