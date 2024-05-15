@@ -131,7 +131,7 @@ export default {
     </div>
     <router-link
       :to="{ name: 'apartment-search' }"
-      class="button hover-scale align-self-center fs-2 mt-5 mb-5"
+      class="px-5 btn btn-secondary hover-scale align-self-center fs-2 mt-5 mb-5"
     >
       Cerca
     </router-link>
@@ -140,16 +140,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.button {
-  display: inline-block;
-  color: var(--rose-red);
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-
 .hover-scale {
   transition: transform 0.3s;
 }
