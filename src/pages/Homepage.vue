@@ -109,7 +109,7 @@ export default {
         />
       </div>
       <div class="input-range col-sm-3 flex-column gap-2 mb-2">
-        <label for="range" class="form-label fs-5">Range di ricerca</label>
+        <label for="range" class="form-label fs-5">Raggio di ricerca</label>
         <input
           v-model="store.rangeSearch"
           type="range"
