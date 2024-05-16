@@ -20,12 +20,12 @@ export default {
     searchbar() {
       let options = {
         searchOptions: {
-          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
           language: "it-IT",
           limit: 5,
         },
         autocompleteOptions: {
-          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
           language: "it-IT",
         },
       };
@@ -60,7 +60,7 @@ export default {
   unmounted() {
     // this.fillStore();
     // console.log(this.searchText);
-    console.log(store.addressSearch);
+    // console.log(store.addressSearch);
     clearTimeout(this.myTimeout);
   },
 };
@@ -69,13 +69,14 @@ export default {
 <template>
   <loading-screen v-if="isLoading" />
   <form class="d-flex flex-column gap-4" @submit.prevent="submitSearch">
-    <h1 class="mt-5 align-self-center">Trova il tua alloggio ideale</h1>
+    <h1 class="font align-self-center fw-bold">Trova il tuo alloggio ideale</h1>
     <div @keyup="onEditorChange($event)" id="searchbox"></div>
-    <div class="d-flex mt-4 justify-content-between">
-      <div class="d-flex flex-column">
-        <label class="form-label me-3" for="rooms">N° Stanze</label>
+    <div class="row mt-4 justify-content-between">
+      <div class="col-sm-3 flex-column">
+        <label class="form-label me-3 fs-5" for="rooms">N° Stanze</label>
         <input
           v-model="store.roomsSearch"
+          class="form-control"
           type="number"
           name="rooms"
           id="rooms"
@@ -83,10 +84,11 @@ export default {
           max="255"
         />
       </div>
-      <div class="d-flex flex-column">
-        <label class="form-label me-3" for="beds">N° Letti</label>
+      <div class="col-sm-3 flex-column">
+        <label class="form-label me-3 fs-5" for="beds">N° Letti</label>
         <input
           v-model="store.bedsSearch"
+          class="form-control"
           type="number"
           name="beds"
           id="beds"
@@ -94,9 +96,10 @@ export default {
           max="255"
         />
       </div>
-      <div class="d-flex flex-column">
-        <label class="form-label me-3" for="bagni">N° Bagni</label>
+      <div class="col-sm-3 flex-column">
+        <label class="form-label me-3 fs-5" for="bagni">N° Bagni</label>
         <input
+          class="form-control"
           v-model="store.bathroomsSearch"
           type="number"
           name="bagni"
@@ -105,8 +108,8 @@ export default {
           max="255"
         />
       </div>
-      <div class="input-range d-flex flex-column gap-2 mb-2">
-        <label for="range" class="form-label">Range di ricerca</label>
+      <div class="input-range col-sm-3 flex-column gap-2 mb-2">
+        <label for="range" class="form-label fs-5">Raggio di ricerca</label>
         <input
           v-model="store.rangeSearch"
           type="range"
@@ -131,15 +134,18 @@ export default {
     </div>
     <router-link
       :to="{ name: 'apartment-search' }"
-      class="button hover-scale align-self-center fs-2 mt-5 mb-5"
+      class="hover-scale align-self-center fs-2 mb-5"
     >
-      Cerca
+      <div class="btn btn-primary fw-bold">Cerca</div>
     </router-link>
   </form>
   <app-slider />
 </template>
 
 <style lang="scss" scoped>
+form {
+  padding: 0 10rem;
+}
 .button {
   display: inline-block;
   color: var(--rose-red);
@@ -149,12 +155,119 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
-
 .hover-scale {
   transition: transform 0.3s;
 }
 
 .hover-scale:hover {
   transform: scale(1.2);
+}
+
+input[type="range"] {
+  height: 25px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 12px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 6px #918ec0;
+  background: #f7f7f7;
+  border-radius: 6px;
+  border: 0px solid #918ec0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000031;
+  border: 0px solid #00001e;
+  height: 18px;
+  width: 18px;
+  border-radius: 25px;
+  background: #918ec0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3px;
+}
+
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #f7f7f7;
+}
+
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 12px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 6px #918ec0;
+  background: #f7f7f7;
+  border-radius: 6px;
+  border: 0px solid #918ec0;
+}
+
+input[type="range"]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000031;
+  border: 0px solid #00001e;
+  height: 18px;
+  width: 18px;
+  border-radius: 25px;
+  background: #918ec0;
+  cursor: pointer;
+}
+
+input[type="range"]::-ms-track {
+  width: 100%;
+  height: 12px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: #f7f7f7;
+  border: 0px solid #918ec0;
+  border-radius: 12px;
+  box-shadow: 0px 0px 6px #918ec0;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background: #f7f7f7;
+  border: 0px solid #918ec0;
+  border-radius: 12px;
+  box-shadow: 0px 0px 6px #918ec0;
+}
+
+input[type="range"]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 1px 1px 1px #000031;
+  border: 0px solid #00001e;
+  height: 18px;
+  width: 18px;
+  border-radius: 25px;
+  background: #918ec0;
+  cursor: pointer;
+}
+
+input[type="range"]:focus::-ms-fill-lower {
+  background: #f7f7f7;
+}
+
+input[type="range"]:focus::-ms-fill-upper {
+  background: #f7f7f7;
+}
+
+@media (max-width: 576px) {
+  form {
+    padding: 0 1rem;
+  }
 }
 </style>

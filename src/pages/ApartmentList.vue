@@ -5,6 +5,19 @@ import axios from "axios";
 import ApartmentCard from "../components/ApartmentCard.vue";
 import AdvancedSearch from "../components/AdvancedSearch.vue";
 import LoadingScreen from "../components/LoadingScreen.vue";
+import {
+  faWifi,
+  faSquareParking,
+  faPersonSwimming,
+  faBellConcierge,
+  faHotTubPerson,
+  faWater,
+  faSeedling,
+  faElevator,
+  faPaw,
+  faSnowflake,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default {
   data() {
@@ -16,6 +29,7 @@ export default {
       addresses: [],
       isLoading: true,
       myTimeout: null,
+      currentServices: [],
     };
   },
 
@@ -67,6 +81,8 @@ export default {
         })
         .then((response) => {
           this.apartments = response.data.result;
+          // this.currentServices = searchServices;
+          // console.log(this.currentServices);
           this.addresses = response.data.addresses;
         });
     },
@@ -93,6 +109,7 @@ export default {
   <!-- <h1></h1> -->
   <loading-screen v-if="isLoading" />
   <advanced-search @search="fetchApartments" />
+
   <h2 class="page-title mb-4">Lista Appartamenti</h2>
   <div v-if="apartments.length != 0" class="row g-3">
     <div v-for="(apartment, index) in apartments" class="col-4">
@@ -103,7 +120,7 @@ export default {
       />
     </div>
   </div>
-  <div class="text-center mt-5 fs-4 h-all" v-else>Nessun risultato trovato</div>
+  <div class="text-center mt-5 fs-4" v-else>Nessun risultato trovato</div>
 </template>
 
 <style lang="scss" scoped>
@@ -117,5 +134,16 @@ export default {
 
 .h-all {
   height: 500px;
+}
+
+.service {
+  background-color: var(--main-color);
+  padding: 10px;
+  border-radius: 10px;
+  color: #333;
+}
+
+.clickable {
+  cursor: pointer;
 }
 </style>

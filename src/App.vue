@@ -21,7 +21,7 @@ export default {
   <div class="page-container">
     <app-header />
 
-    <div class="container my-5">
+    <div class="container main-container my-5">
       <app-main></app-main>
     </div>
 
@@ -34,5 +34,9 @@ export default {
 
 .page-container {
   background-color: var(--white);
+
+  .main-container {
+    min-height: calc(100vh - 145px - 120px - 96px);
+  }
 }
 </style>

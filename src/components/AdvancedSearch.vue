@@ -2,7 +2,6 @@
 import { api, store } from "../store";
 import axios from "axios";
 
-
 import {
   faWifi,
   faSquareParking,
@@ -18,7 +17,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default {
-
   data() {
     return {
       store,
@@ -30,17 +28,17 @@ export default {
       searchRange: store.rangeSearch ?? 20,
       searchServices: [],
       serviceIcons: {
-        'WiFi': faWifi,
-        'Posto Macchina': faSquareParking,
-        'Piscina': faPersonSwimming,
-        'Portineria': faBellConcierge,
-        'Sauna': faHotTubPerson,
-        'Vista Mare': faWater,
-        'Giardino': faSeedling,
-        'Ascensore': faElevator,
-        'Animali ammessi': faPaw,
-        'Aria Condizionata': faSnowflake,
-        'Location': faLocationDot,
+        WiFi: faWifi,
+        "Posto Macchina": faSquareParking,
+        Piscina: faPersonSwimming,
+        Portineria: faBellConcierge,
+        Sauna: faHotTubPerson,
+        "Vista Mare": faWater,
+        Giardino: faSeedling,
+        Ascensore: faElevator,
+        "Animali ammessi": faPaw,
+        "Aria Condizionata": faSnowflake,
+        Location: faLocationDot,
       },
     };
   },
@@ -59,12 +57,12 @@ export default {
     searchbar() {
       let options = {
         searchOptions: {
-          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
           language: "it-IT",
           limit: 5,
         },
         autocompleteOptions: {
-          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
           language: "it-IT",
         },
       };
@@ -98,6 +96,14 @@ export default {
       }
     },
 
+    deleteService(id) {
+      if (this.searchServices.length == 1) {
+        return (this.searchServices = []);
+      } else {
+        return this.searchServices.splice(id, 1);
+      }
+    },
+
     getServiceIcon(serviceName) {
       return this.serviceIcons[serviceName] || null;
     },
@@ -106,8 +112,8 @@ export default {
 </script>
 
 <template>
-  <div class="container d-flex">
-    <div class="input-group mb-4">
+  <div class="container">
+    <div class="input-group mb-4 d-flex">
       <!-- <input
         type="text"
         :placeholder="store.addressSearch"
@@ -117,12 +123,32 @@ export default {
       /> -->
       <div id="searchbox"></div>
       <div>
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasExample"
+        >
           Filtri avanzati
         </button>
         <button class="btn btn-secondary" @click="$emit('search', searchText)">
           Cerca
         </button>
+      </div>
+    </div>
+    <div class="row">
+      <div v-for="service in searchServices" class="col-2">
+        <div class="service d-flex justify-content-between mb-3">
+          <font-awesome-icon
+            class="fs-4"
+            :icon="`fa-solid ${store.services[service - 1]}`"
+          />
+          <font-awesome-icon
+            @click="$emit('search', searchText, deleteService(service - 1))"
+            class="align-self-center clickable"
+            icon="fa-solid fa-x"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -131,13 +157,16 @@ export default {
       <h5 class="offcanvas-title fs-3" id="offcanvasExampleLabel">
         <strong> Filtri Avanzati </strong>
       </h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+      ></button>
     </div>
     <div class="offcanvas-body p-4">
       <div class="fw-bold fs-4">Cerca l'alloggio che fa per te!</div>
       <div class="mt-3 fs-5">
-
-        <label for="range" class="form-label">Range di ricerca</label>
+        <label for="range" class="form-label">Raggio di ricerca</label>
         <div class="input-range d-flex gap-1 mb-2">
           <input
             v-model="searchRange"
@@ -163,38 +192,67 @@ export default {
         <div class="row my-3">
           <div class="col-6">
             <label for="beds" class="form-label me-3">N° Letti</label>
-            <input class="w-75" v-model="searchBeds" type="number" min="1" max="20" id="beds" name="beds" />
+            <input
+              class="w-75"
+              v-model="searchBeds"
+              type="number"
+              min="1"
+              max="20"
+              id="beds"
+              name="beds"
+            />
           </div>
           <div class="col-6">
             <label for="rooms" class="form-label me-3">N° Stanze</label>
-            <input class="w-75" v-model="searchRooms" type="number" min="1" max="50" id="rooms" name="rooms" />
+            <input
+              class="w-75"
+              v-model="searchRooms"
+              type="number"
+              min="1"
+              max="50"
+              id="rooms"
+              name="rooms"
+            />
           </div>
-          <label for="" class="fw-bold my-3">Seleziona i servizi che desideri:</label>
+          <label for="" class="fw-bold my-3"
+            >Seleziona i servizi che desideri:</label
+          >
 
           <div class="col-6" v-for="service in allServices" :key="service.id">
             <div v-show="this.allServices.length > 0" class="form-check">
-              <input @click="handleServiceClick(service.id)" class="form-check-input" type="checkbox" :id="service.id"
-                :value="service.id" />
+              <input
+                @click="handleServiceClick(service.id)"
+                class="form-check-input"
+                type="checkbox"
+                :id="service.id"
+                :value="service.id"
+                :checked="searchServices.includes(service.id) ?? false"
+              />
 
               <label class="form-check-label" :for="service.id">
-                <font-awesome-icon v-if="getServiceIcon(service.name)" :icon="getServiceIcon(service.name)"
-                  class="me-2" />
+                <font-awesome-icon
+                  v-if="getServiceIcon(service.name)"
+                  :icon="getServiceIcon(service.name)"
+                  class="me-2"
+                />
                 {{ service.name }}
               </label>
             </div>
           </div>
-
         </div>
-        <button @click="
-          $emit(
-            'search',
-            searchText,
-            searchRange,
-            searchBeds,
-            searchRooms,
-            searchServices
-          )
-          " class="btn btn-modal">
+        <button
+          @click="
+            $emit(
+              'search',
+              searchText,
+              searchRange,
+              searchBeds,
+              searchRooms,
+              searchServices
+            )
+          "
+          class="btn btn-modal"
+        >
           Applica Filtri
         </button>
       </div>
@@ -218,7 +276,6 @@ export default {
   }
 
   .input-group {
-    width: 70%;
     display: flex;
     justify-content: space-around;
     align-items: end;
@@ -270,7 +327,7 @@ export default {
   .offcanvas {
     width: 500px;
     color: var(--main-color);
-    background-color: #F0F8FF;
+    background-color: #f0f8ff;
 
     .offcanvas-title {
       color: var(--main-color);
@@ -391,7 +448,17 @@ export default {
     .form-check-input {
       border-color: #918ec0;
     }
-
   }
+}
+
+.service {
+  background-color: var(--main-color);
+  padding: 10px;
+  border-radius: 10px;
+  color: #333;
+}
+
+.clickable {
+  cursor: pointer;
 }
 </style>

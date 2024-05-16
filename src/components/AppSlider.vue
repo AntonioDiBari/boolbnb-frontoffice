@@ -79,6 +79,7 @@ export default {
 
 
 <template>
+
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
@@ -89,6 +90,8 @@ export default {
           @mouseover="stopAutoPlay()" @mouseleave="setAutoPlay()">
           <div class="item">
             <router-link :to="{
+
+ 
           name: 'apartment-detail',
           params: { slug: sponsoredApartments[activeImg].slug },
         }">
@@ -134,7 +137,7 @@ export default {
   float: left;
   flex-grow: 1;
   object-fit: cover;
-  image-rendering: pixelated;
+
   position: relative;
   cursor: pointer;
 }
@@ -142,8 +145,10 @@ export default {
 .item img {
   width: 880px;
   height: 100%;
+
   object-fit: cover;
   // object-position: center;
+
   border-radius: 20px 0 0 20px;
   cursor: pointer;
   image-rendering: auto;
@@ -169,15 +174,21 @@ export default {
 
 .thumb {
   height: calc(100% / var(--thumb-count));
+
   width: 120px;
+
+  object-fit: cover;
+
   opacity: 0.5;
 }
 
 .thumb img {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
   image-rendering: auto;
+
 }
 
 .thumb.active {
@@ -243,6 +254,7 @@ oppure i caratteri ∧ (&and;) e ∨ (&or;)
   transform: translate(-50%) rotate(135deg);
 }
 
+
 .item .overlay {
   position: absolute;
   top: 0;
@@ -263,5 +275,16 @@ oppure i caratteri ∧ (&and;) e ∨ (&or;)
 
 .item:hover .overlay {
   opacity: 1;
+
+@media (max-width: 576px) {
+  .thumbs {
+    display: none;
+  }
+
+  .item img {
+    border-radius: 20px;
+    object-fit: fill;
+  }
+
 }
 </style>
