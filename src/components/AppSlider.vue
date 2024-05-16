@@ -45,17 +45,19 @@ export default {
     fetchApartments() {
       axios.get(`${api.baseUrl}apartment-sponsor`).then((response) => {
         if (response.data.result && Array.isArray(response.data.result.data)) {
-
-          let filteredApartments = response.data.result.data.filter(apartment => apartment.img && apartment.sponsored);
+          let filteredApartments = response.data.result.data.filter(
+            (apartment) => apartment.img && apartment.sponsored
+          );
 
           filteredApartments = filteredApartments.slice(0, 10);
 
           this.images = response.data.result.data.map(
             (apartment) => apartment.img
           );
-          this.images = this.images.filter((image) => image != "https://placehold.co/600x400");
+          this.images = this.images.filter(
+            (image) => image != "https://placehold.co/600x400"
+          );
           this.sponsoredApartments = response.data.result.data;
-
         } else {
           console.error("formato immagine non valido");
         }
@@ -64,10 +66,10 @@ export default {
 
     // Metodo per generare l'attributo srcset
     getSrcSet(imageUrl) {
-      const baseImageUrl = imageUrl.replace(/(\.[a-z]+)$/, '');
+      const baseImageUrl = imageUrl.replace(/(\.[a-z]+)$/, "");
       const extension = imageUrl.match(/(\.[a-z]+)$/)[0];
       return `${baseImageUrl}-small${extension} 480w, ${baseImageUrl}-medium${extension} 768w, ${baseImageUrl}-large${extension} 1024w, ${imageUrl} 1280w`;
-    }
+    },
   },
 
   mounted() {
@@ -77,27 +79,35 @@ export default {
 };
 </script>
 
-
 <template>
-
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <h4 v-if="sponsoredApartments.length > 0" class="text-center mb-5">
           Alcuni appartamenti consigliati da noi:
         </h4>
-        <div v-if="sponsoredApartments.length > 0" class="slider-wrapper d-flex justify-content-center" tabindex="0"
-          @mouseover="stopAutoPlay()" @mouseleave="setAutoPlay()">
+        <div
+          v-if="sponsoredApartments.length > 0"
+          class="slider-wrapper d-flex justify-content-center"
+          tabindex="0"
+          @mouseover="stopAutoPlay()"
+          @mouseleave="setAutoPlay()"
+        >
           <div class="item">
-            <router-link :to="{
-
- 
-          name: 'apartment-detail',
-          params: { slug: sponsoredApartments[activeImg].slug },
-        }">
-
-              <img :src="images[activeImg]" :srcset="getSrcSet(images[activeImg])" alt="immagine" />
-              <div class="overlay">{{ sponsoredApartments[activeImg].title_desc }}</div>
+            <router-link
+              :to="{
+                name: 'apartment-detail',
+                params: { slug: sponsoredApartments[activeImg].slug },
+              }"
+            >
+              <img
+                :src="images[activeImg]"
+                :srcset="getSrcSet(images[activeImg])"
+                alt="immagine"
+              />
+              <div class="overlay">
+                {{ sponsoredApartments[activeImg].title_desc }}
+              </div>
             </router-link>
           </div>
 
@@ -105,19 +115,22 @@ export default {
             <div class="prev" @click="prevSlide"></div>
             <div class="next" @click="nextSlide"></div>
 
-            <img v-for="(image, index) in images" :key="index" :src="image" class="thumb" :class="{
-          active: index === activeImg,
-          first: index === 0,
-          last: index === images.length - 1,
-        }" />
-
-
+            <img
+              v-for="(image, index) in images"
+              :key="index"
+              :src="image"
+              class="thumb"
+              :class="{
+                active: index === activeImg,
+                first: index === 0,
+                last: index === images.length - 1,
+              }"
+            />
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <style lang="scss" scoped>
@@ -130,7 +143,6 @@ export default {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.512);
   position: relative;
   left: -60px;
-
 }
 
 .item {
@@ -152,7 +164,6 @@ export default {
   border-radius: 20px 0 0 20px;
   cursor: pointer;
   image-rendering: auto;
-
 }
 
 .item .text {
@@ -188,7 +199,6 @@ export default {
 
   object-fit: cover;
   image-rendering: auto;
-
 }
 
 .thumb.active {
@@ -254,7 +264,6 @@ oppure i caratteri ∧ (&and;) e ∨ (&or;)
   transform: translate(-50%) rotate(135deg);
 }
 
-
 .item .overlay {
   position: absolute;
   top: 0;
@@ -275,7 +284,7 @@ oppure i caratteri ∧ (&and;) e ∨ (&or;)
 
 .item:hover .overlay {
   opacity: 1;
-
+}
 @media (max-width: 576px) {
   .thumbs {
     display: none;
@@ -285,6 +294,5 @@ oppure i caratteri ∧ (&and;) e ∨ (&or;)
     border-radius: 20px;
     object-fit: fill;
   }
-
 }
 </style>
