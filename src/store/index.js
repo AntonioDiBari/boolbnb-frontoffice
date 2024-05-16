@@ -12,15 +12,45 @@ export const store = reactive({
   bathroomsSearch: 1,
   rangeSearch: 1,
   services: [
-    "fa-wifi",
-    "fa-square-parking",
-    "fa-person-swimming",
-    "fa-bell-concierge",
-    "fa-hot-tub-person",
-    "fa-water",
-    "fa-seedling",
-    "fa-elevator",
-    "fa-paw",
-    "fa-snowflake",
+    {
+      name: "Wifi",
+      logo: "fa-wifi",
+    },
+    {
+      name: "Posto macchina",
+      logo: "fa-square-parking",
+    },
+    {
+      name: "Piscina",
+      logo: "fa-person-swimming",
+    },
+    {
+      name: "Portineria",
+      logo: "fa-bell-concierge",
+    },
+    {
+      name: "Sauna",
+      logo: "fa-hot-tub-person",
+    },
+    {
+      name: "Vista mare",
+      logo: "fa-water",
+    },
+    {
+      name: "Giardino",
+      logo: "fa-seedling",
+    },
+    {
+      name: "Ascensore",
+      logo: "fa-elevator",
+    },
+    {
+      name: "Animali ammessi",
+      logo: "fa-paw",
+    },
+    {
+      name: "Aria condizionata",
+      logo: "fa-snowflake",
+    },
   ],
 });
