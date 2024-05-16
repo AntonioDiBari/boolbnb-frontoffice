@@ -16,7 +16,7 @@ export default {
 
         <div class="social">
           <p>Trovaci anche sui nostri social!</p>
-          <ul class="list-unstyled d-flex justify-content-around fs-5">
+          <ul class="list-unstyled d-flex justify-content-center fs-5">
             <li class="me-3">
               <a href="https://www.instagram.com/"
                 ><font-awesome-icon icon="fa-brands fa-instagram"
@@ -110,6 +110,10 @@ footer {
       text-decoration: underline;
       color: white;
     }
+  }
+
+  .col-4 {
+    text-align: center;
   }
 }
 
