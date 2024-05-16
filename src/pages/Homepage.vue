@@ -20,12 +20,12 @@ export default {
     searchbar() {
       let options = {
         searchOptions: {
-          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
+          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
           language: "it-IT",
           limit: 5,
         },
         autocompleteOptions: {
-          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
+          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
           language: "it-IT",
         },
       };
