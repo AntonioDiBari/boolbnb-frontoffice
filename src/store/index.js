@@ -11,4 +11,16 @@ export const store = reactive({
   bedsSearch: 1,
   bathroomsSearch: 1,
   rangeSearch: 1,
+  services: [
+    "fa-wifi",
+    "fa-square-parking",
+    "fa-person-swimming",
+    "fa-bell-concierge",
+    "fa-hot-tub-person",
+    "fa-water",
+    "fa-seedling",
+    "fa-elevator",
+    "fa-paw",
+    "fa-snowflake",
+  ],
 });

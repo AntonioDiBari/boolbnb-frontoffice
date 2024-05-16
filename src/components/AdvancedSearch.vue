@@ -96,6 +96,14 @@ export default {
       }
     },
 
+    deleteService(id) {
+      if (this.searchServices.length == 1) {
+        return (this.searchServices = []);
+      } else {
+        return this.searchServices.splice(id, 1);
+      }
+    },
+
     getServiceIcon(serviceName) {
       return this.serviceIcons[serviceName] || null;
     },
@@ -104,8 +112,8 @@ export default {
 </script>
 
 <template>
-  <div class="container d-flex">
-    <div class="input-group mb-4">
+  <div class="container">
+    <div class="input-group mb-4 d-flex">
       <!-- <input
         type="text"
         :placeholder="store.addressSearch"
@@ -126,6 +134,21 @@ export default {
         <button class="btn btn-secondary" @click="$emit('search', searchText)">
           Cerca
         </button>
+      </div>
+    </div>
+    <div class="row">
+      <div v-for="service in searchServices" class="col-2">
+        <div class="service d-flex justify-content-between mb-3">
+          <font-awesome-icon
+            class="fs-4"
+            :icon="`fa-solid ${store.services[service - 1]}`"
+          />
+          <font-awesome-icon
+            @click="$emit('search', searchText, deleteService(service - 1))"
+            class="align-self-center clickable"
+            icon="fa-solid fa-x"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -203,6 +226,8 @@ export default {
                 type="checkbox"
                 :id="service.id"
                 :value="service.id"
+                :checked="searchServices.includes(service.id) ?? false"
+
               />
 
               <label class="form-check-label" :for="service.id">
@@ -252,7 +277,6 @@ export default {
   }
 
   .input-group {
-    width: 70%;
     display: flex;
     justify-content: space-around;
     align-items: end;
@@ -426,5 +450,16 @@ export default {
       border-color: #918ec0;
     }
   }
+}
+
+.service {
+  background-color: var(--main-color);
+  padding: 10px;
+  border-radius: 10px;
+  color: #333;
+}
+
+.clickable {
+  cursor: pointer;
 }
 </style>

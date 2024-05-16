@@ -60,7 +60,7 @@ export default {
   unmounted() {
     // this.fillStore();
     // console.log(this.searchText);
-    console.log(store.addressSearch);
+    // console.log(store.addressSearch);
     clearTimeout(this.myTimeout);
   },
 };
@@ -155,7 +155,6 @@ form {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
-
 .hover-scale {
   transition: transform 0.3s;
 }
