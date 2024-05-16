@@ -117,7 +117,6 @@ export default {
   float: left;
   flex-grow: 1;
   object-fit: cover;
-  image-rendering: pixelated;
 
   position: relative;
   cursor: pointer;
@@ -126,7 +125,6 @@ export default {
 .item img {
   width: 100%;
   height: 100%;
-  object-fit: fill;
   border-radius: 20px 0 0 20px;
   cursor: pointer;
 }
@@ -153,6 +151,7 @@ export default {
 .thumb {
   height: calc(100% / var(--thumb-count));
   width: 200px;
+  object-fit: cover;
 
   opacity: 0.5;
 }
@@ -160,7 +159,6 @@ export default {
 .thumb img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .thumb.active {
@@ -224,5 +222,16 @@ oppure i caratteri ∧ (&and;) e ∨ (&or;)
   bottom: 35%;
   left: 50%;
   transform: translate(-50%) rotate(135deg);
+}
+
+@media (max-width: 576px) {
+  .thumbs {
+    display: none;
+  }
+
+  .item img {
+    border-radius: 20px;
+    object-fit: fill;
+  }
 }
 </style>
