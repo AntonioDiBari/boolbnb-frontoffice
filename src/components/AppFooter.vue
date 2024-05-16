@@ -94,6 +94,7 @@ export default {
 <style lang="scss" scoped>
 footer {
   height: 145px;
+  box-shadow: 0px -2px 3px 4px var(--main-color);
 
   background: linear-gradient(to bottom, var(--main-color), var(--gray));
 

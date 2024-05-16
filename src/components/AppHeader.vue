@@ -5,6 +5,7 @@ export default {
   data() {
     return {
       title: "BoolBnB",
+      user: false,
     };
   },
 };
@@ -12,7 +13,7 @@ export default {
 
 <template>
   <header>
-    <div class="container d-flex justify-content-between">
+    <div class="container d-flex justify-content-between align-items-center">
       <div class="d-flex">
         <router-link :to="{ name: 'homepage' }">
           <div class="logo-box d-flex">
@@ -22,19 +23,21 @@ export default {
         <div class="title align-self-center">{{ this.title }}</div>
       </div>
       <div class="login-box gap-2 d-flex align-items-center">
-        <a href="http://127.0.0.1:8000/register">
-          <button class="btn btn-primary fw-bold">Registrati</button></a
-        >
         <a href="http://127.0.0.1:8000/login">
-          <button class="btn btn-primary fw-bold">Accedi</button></a
-        >
+          <div v-if="this.user == true" class="btn btn-info">
+            <p>Area personale</p>
+          </div>
+        </a>
+        <div class="user-logo" @click="this.user = !this.user">
+          <font-awesome-icon icon="fa-solid fa-circle-user" class="user" />
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <style lang="scss" scoped>
-@use "../styles/general.scss";
+// @use "../styles/general.scss";
 
 header {
   height: 120px;
@@ -61,13 +64,16 @@ header {
   }
 
   .login-box {
-    .btn-primary {
-      background-color: #600b1f;
-      box-shadow: 0 0 2px 0px #600b1f;
-      opacity: 0.9;
-      &:hover {
-        background-color: #9e374f;
-        opacity: 1;
+    height: 60px;
+    .user-logo {
+      .user {
+        font-size: 50px;
+        color: #600b1f;
+        cursor: pointer;
+        &:hover {
+          color: #9e374f;
+          opacity: 1;
+        }
       }
     }
   }

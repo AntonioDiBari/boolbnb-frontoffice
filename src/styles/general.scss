@@ -36,6 +36,15 @@ body {
         transition: 0.5s;
       }
     }
+    .btn-info {
+      background-color: #600b1f;
+      border: none;
+      color: white;
+      font-weight: bold;
+      &:hover {
+        background-color: #9e374f;
+      }
+    }
   }
 }
 
