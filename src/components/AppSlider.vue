@@ -45,19 +45,19 @@ export default {
     fetchApartments() {
       axios.get(`${api.baseUrl}apartment-sponsor`).then((response) => {
         if (response.data.result && Array.isArray(response.data.result.data)) {
-          let filteredApartments = response.data.result.data.filter(
-            (apartment) => apartment.img && apartment.sponsored
-          );
+          // let filteredApartments = response.data.result.data.filter(
+          //   (apartment) => apartment.img && apartment.sponsored
+          // );
+          // filteredApartments = response.data.result.data.slice(0, 10);
 
-          filteredApartments = filteredApartments.slice(0, 10);
-
-          this.images = response.data.result.data.map(
-            (apartment) => apartment.img
-          );
+          this.images = response.data.result.data.map(function (apartment) {
+            return [apartment.img, apartment.title_desc, apartment.slug];
+          });
           this.images = this.images.filter(
-            (image) => image != "https://placehold.co/600x400"
+            (image) => image[0] != "https://placehold.co/600x400"
           );
-          this.sponsoredApartments = response.data.result.data;
+          this.images = this.images.slice(0, 9);
+          // this.sponsoredApartments = response.data.result.data;
         } else {
           console.error("formato immagine non valido");
         }
@@ -83,11 +83,11 @@ export default {
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <h4 v-if="sponsoredApartments.length > 0" class="text-center mb-5">
+        <h4 v-if="images.length > 0" class="text-center mb-5">
           Alcuni appartamenti consigliati da noi:
         </h4>
         <div
-          v-if="sponsoredApartments.length > 0"
+          v-if="images.length > 0"
           class="slider-wrapper d-flex justify-content-center"
           tabindex="0"
           @mouseover="stopAutoPlay()"
@@ -97,16 +97,16 @@ export default {
             <router-link
               :to="{
                 name: 'apartment-detail',
-                params: { slug: sponsoredApartments[activeImg].slug },
+                params: { slug: images[activeImg][2] },
               }"
             >
               <img
-                :src="images[activeImg]"
-                :srcset="getSrcSet(images[activeImg])"
+                :src="images[activeImg][0]"
+                :srcset="getSrcSet(images[activeImg][0])"
                 alt="immagine"
               />
               <div class="overlay">
-                {{ sponsoredApartments[activeImg].title_desc }}
+                {{ images[activeImg][1] }}
               </div>
             </router-link>
           </div>
@@ -118,7 +118,7 @@ export default {
             <img
               v-for="(image, index) in images"
               :key="index"
-              :src="image"
+              :src="image[0]"
               class="thumb"
               :class="{
                 active: index === activeImg,

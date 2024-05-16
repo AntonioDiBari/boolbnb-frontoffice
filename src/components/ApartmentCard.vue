@@ -17,11 +17,21 @@ export default {
 </script>
 
 <template>
-  <router-link :to="{ name: 'apartment-detail', params: { slug: apartment.slug } }">
+  <router-link
+    :to="{ name: 'apartment-detail', params: { slug: apartment.slug } }"
+  >
     <div class="card h-100">
       <div class="apartment-item h-100">
-        <div class="apartment-content">
-          <img v-if="apartment.img" :src="apartment.img" class="apartment-image" alt="..." />
+        <div class="apartment-content position-relative">
+          <div v-if="apartment.sponsors[0]" class="fire position-absolute fs-1">
+            <img src="../assets/logo.png" alt="" />
+          </div>
+          <img
+            v-if="apartment.img"
+            :src="apartment.img"
+            class="apartment-image"
+            alt="..."
+          />
           <div class="card-body">
             <h4 class="text-light">{{ getAbstract(apartment.title_desc) }}</h4>
             <!-- <span>{{ getAbstract(address) }}</span> -->
@@ -38,7 +48,10 @@ export default {
               </div>
             </div>
             <div class="services d-flex gap-3 mt-2">
-              <font-awesome-icon v-for="service in apartment.services" :icon="`fa-solid fa-${service.logo}`" />
+              <font-awesome-icon
+                v-for="service in apartment.services"
+                :icon="`fa-solid fa-${service.logo}`"
+              />
             </div>
           </div>
         </div>
@@ -69,6 +82,11 @@ export default {
 .apartment-content {
   padding: 20px;
   height: 100%;
+  .fire {
+    right: 30px;
+    top: 15px;
+    mix-blend-mode: multiply;
+  }
 }
 
 .apartment-image {
