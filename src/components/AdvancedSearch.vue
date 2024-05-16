@@ -141,8 +141,9 @@ export default {
         <div class="service d-flex justify-content-between mb-3">
           <font-awesome-icon
             class="fs-4"
-            :icon="`fa-solid ${store.services[service - 1]}`"
+            :icon="`fa-solid ${store.services[service - 1].logo}`"
           />
+          <span>{{ store.services[service - 1].name }}</span>
           <font-awesome-icon
             @click="$emit('search', searchText, deleteService(service - 1))"
             class="align-self-center clickable"
