@@ -69,10 +69,10 @@ export default {
 <template>
   <loading-screen v-if="isLoading" />
   <form class="d-flex flex-column gap-4" @submit.prevent="submitSearch">
-    <h1 class="align-self-center fw-bold">Trova il tuo alloggio ideale</h1>
+    <h1 class="font align-self-center fw-bold">Trova il tuo alloggio ideale</h1>
     <div @keyup="onEditorChange($event)" id="searchbox"></div>
-    <div class="d-flex mt-4 justify-content-between">
-      <div class="d-flex flex-column">
+    <div class="row mt-4 justify-content-between">
+      <div class="col-sm-3 flex-column">
         <label class="form-label me-3 fs-5" for="rooms">N° Stanze</label>
         <input
           v-model="store.roomsSearch"
@@ -84,7 +84,7 @@ export default {
           max="255"
         />
       </div>
-      <div class="d-flex flex-column">
+      <div class="col-sm-3 flex-column">
         <label class="form-label me-3 fs-5" for="beds">N° Letti</label>
         <input
           v-model="store.bedsSearch"
@@ -96,7 +96,7 @@ export default {
           max="255"
         />
       </div>
-      <div class="d-flex flex-column">
+      <div class="col-sm-3 flex-column">
         <label class="form-label me-3 fs-5" for="bagni">N° Bagni</label>
         <input
           class="form-control"
@@ -108,8 +108,8 @@ export default {
           max="255"
         />
       </div>
-      <div class="input-range d-flex flex-column gap-2 mb-2">
-        <label for="range" class="form-label fs-5">Range di ricerca</label>
+      <div class="input-range col-sm-3 flex-column gap-2 mb-2">
+        <label for="range" class="form-label fs-5">Raggio di ricerca</label>
         <input
           v-model="store.rangeSearch"
           type="range"
@@ -263,5 +263,11 @@ input[type="range"]:focus::-ms-fill-lower {
 
 input[type="range"]:focus::-ms-fill-upper {
   background: #f7f7f7;
+}
+
+@media (max-width: 576px) {
+  form {
+    padding: 0 1rem;
+  }
 }
 </style>

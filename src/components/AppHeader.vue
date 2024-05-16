@@ -78,4 +78,41 @@ header {
     }
   }
 }
+
+@media (max-width: 576px) {
+  header {
+    .title {
+      font-size: 30px;
+      font-weight: bold;
+      color: #600b1f;
+      opacity: 0.9;
+      text-shadow: 0 0 2px;
+    }
+    .logo-box {
+      height: 120px;
+      aspect-ratio: 1;
+
+      img {
+        mix-blend-mode: multiply;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .login-box {
+      height: 60px;
+      .user-logo {
+        .user {
+          font-size: 40px;
+          color: #600b1f;
+          cursor: pointer;
+          &:hover {
+            color: #9e374f;
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

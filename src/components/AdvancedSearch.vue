@@ -166,7 +166,7 @@ export default {
     <div class="offcanvas-body p-4">
       <div class="fw-bold fs-4">Cerca l'alloggio che fa per te!</div>
       <div class="mt-3 fs-5">
-        <label for="range" class="form-label">Range di ricerca</label>
+        <label for="range" class="form-label">Raggio di ricerca</label>
         <div class="input-range d-flex gap-1 mb-2">
           <input
             v-model="searchRange"
@@ -227,7 +227,6 @@ export default {
                 :id="service.id"
                 :value="service.id"
                 :checked="searchServices.includes(service.id) ?? false"
-
               />
 
               <label class="form-check-label" :for="service.id">
