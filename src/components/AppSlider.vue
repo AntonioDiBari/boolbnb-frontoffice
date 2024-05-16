@@ -100,11 +100,7 @@ export default {
                 params: { slug: sponsoredApartments[activeImg].slug },
               }"
             >
-              <img
-                :src="images[activeImg]"
-                :srcset="getSrcSet(images[activeImg])"
-                alt="immagine"
-              />
+              <img :src="images[activeImg]" alt="immagine" />
               <div class="overlay">
                 {{ sponsoredApartments[activeImg].title_desc }}
               </div>
