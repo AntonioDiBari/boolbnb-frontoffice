@@ -102,7 +102,6 @@ export default {
             >
               <img
                 :src="images[activeImg][0]"
-                :srcset="getSrcSet(images[activeImg][0])"
                 alt="immagine"
               />
               <div class="overlay">
