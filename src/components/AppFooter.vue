@@ -89,6 +89,7 @@ export default {
 <style lang="scss" scoped>
 footer {
   box-shadow: 0px -2px 3px 4px var(--main-color);
+  height: 145px;
 
   background: linear-gradient(to bottom, var(--main-color), var(--gray));
 
@@ -123,5 +124,8 @@ footer {
 }
 
 @media (max-width: 576px) {
+  footer {
+    height: auto;
+  }
 }
 </style>

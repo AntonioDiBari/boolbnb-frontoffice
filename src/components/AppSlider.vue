@@ -138,11 +138,10 @@ export default {
 
 .slider-wrapper {
   height: 500px;
-  width: 1000px;
+
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.512);
   position: relative;
-  left: -60px;
 }
 
 .item {
