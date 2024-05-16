@@ -57,12 +57,12 @@ export default {
     searchbar() {
       let options = {
         searchOptions: {
-          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
           language: "it-IT",
           limit: 5,
         },
         autocompleteOptions: {
-          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
           language: "it-IT",
         },
       };
@@ -227,6 +227,7 @@ export default {
                 :id="service.id"
                 :value="service.id"
                 :checked="searchServices.includes(service.id) ?? false"
+
               />
 
               <label class="form-check-label" :for="service.id">
