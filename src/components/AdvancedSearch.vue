@@ -57,12 +57,12 @@ export default {
     searchbar() {
       let options = {
         searchOptions: {
-          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+          key: "SJwE3fU3HSTpU5zOFiK3YUQWEr7XG21I",
           language: "it-IT",
           limit: 5,
         },
         autocompleteOptions: {
-          key: "J3iuAWIFiXr0BqrC4gh2RHMmzjR7mdUt",
+          key: "SJwE3fU3HSTpU5zOFiK3YUQWEr7XG21I",
           language: "it-IT",
         },
       };
@@ -100,7 +100,10 @@ export default {
       if (this.searchServices.length == 1) {
         return (this.searchServices = []);
       } else {
-        return this.searchServices.splice(id, 1);
+        if (this.searchServices.includes(id)) {
+          console.log(this.searchServices.splice(id, 1));
+          return this.searchServices.splice(id, 1);
+        }
       }
     },
 
@@ -137,18 +140,18 @@ export default {
       </div>
     </div>
     <div class="row">
-      <div v-for="service in searchServices" class="col-2">
+      <div v-for="(service, index) in searchServices" class="col-2">
         <div class="service d-flex justify-content-between mb-3">
           <font-awesome-icon
             class="fs-4"
             :icon="`fa-solid ${store.services[service - 1].logo}`"
           />
           <span>{{ store.services[service - 1].name }}</span>
-          <font-awesome-icon
-            @click="$emit('search', searchText, deleteService(service - 1))"
+          <!-- <font-awesome-icon
+            @click="$emit('search', searchText, deleteService(service.id))"
             class="align-self-center clickable"
             icon="fa-solid fa-x"
-          />
+          /> -->
         </div>
       </div>
     </div>
