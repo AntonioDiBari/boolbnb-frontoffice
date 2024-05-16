@@ -26,6 +26,7 @@ import {
   faPhone,
   faEnvelope,
   faCircleUser,
+  faFire,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
@@ -47,6 +48,7 @@ library.add(
   faPhone,
   faEnvelope,
   faCircleUser,
+  faFire,
   faX,
   far,
   fab
