@@ -5,73 +5,77 @@ export default {
   data() {
     return {
       title: "BoolBnB",
+      user: false,
     };
   },
 };
 </script>
 
 <template>
-  <header class="navbar navbar-expand-lg">
-    <div class="container">
-
-      <div class="d-flex w-100 justify-content-between">
-
-        <!-- to do: collegare link -->
-        <router-link to="/">
-          <img class="img-fluid logo" src="../assets/logo.png" alt="" />
+  <header>
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex">
+        <router-link :to="{ name: 'homepage' }">
+          <div class="logo-box d-flex">
+            <img src="../assets/logo.png" alt="logo" />
+          </div>
         </router-link>
-
-        <div class="d-flex align-items-center">
-          <h1 class="shadow-text" style="font-size: 5rem;">{{ title }}</h1>
+        <div class="title align-self-center">{{ this.title }}</div>
+      </div>
+      <div class="login-box gap-2 d-flex align-items-center">
+        <a href="http://127.0.0.1:8000/login">
+          <div v-if="this.user == true" class="btn btn-info">
+            <p>Area personale</p>
+          </div>
+        </a>
+        <div class="user-logo" @click="this.user = !this.user">
+          <font-awesome-icon icon="fa-solid fa-circle-user" class="user" />
         </div>
-
-
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a href="http://127.0.0.1:8000/register" class="btn btn-outline-light">Registrati</a>
-          </li>
-          <li class="nav-item">
-            <a href="http://127.0.0.1:8000/login" class="btn btn-outline-light">Accedi</a>
-          </li>
-        </ul>
       </div>
     </div>
-
   </header>
 </template>
 
 <style lang="scss" scoped>
-@use "../styles/general.scss";
+// @use "../styles/general.scss";
 
-
-
-.navbar {
+header {
+  height: 120px;
   background-color: var(--main-color);
-  max-height: 10vh;
-}
+  box-shadow: 0px -2px 3px 4px var(--main-color);
+  background: linear-gradient(to top, var(--main-color), var(--gray));
+  .title {
+    font-size: 60px;
+    font-weight: bold;
+    color: #600b1f;
+    opacity: 0.9;
+    text-shadow: 0 0 2px;
+  }
 
+  .logo-box {
+    height: 120px;
+    aspect-ratio: 1;
 
-.text-pink {
-  color: #ff4081;
-}
+    img {
+      mix-blend-mode: multiply;
+      width: 100%;
+      height: 100%;
+    }
+  }
 
-.shadow-text {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.btn {
-  margin: 5px;
-  border-color: var(--gray);
-  background-color: var(--rose-red);
-}
-
-.logo {
-  width: 170px;
-  height: auto;
-  mix-blend-mode: multiply;
-}
-
-li {
-  align-content: center;
+  .login-box {
+    height: 60px;
+    .user-logo {
+      .user {
+        font-size: 50px;
+        color: #600b1f;
+        cursor: pointer;
+        &:hover {
+          color: #9e374f;
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
 </style>

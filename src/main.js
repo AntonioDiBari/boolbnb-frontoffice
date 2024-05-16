@@ -23,7 +23,10 @@ import {
   faPaw,
   faSnowflake,
   faLocationDot,
-  faX,
+  faPhone,
+  faEnvelope,
+  faCircleUser,
+  
 } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -41,7 +44,9 @@ library.add(
   faPaw,
   faSnowflake,
   faLocationDot,
-  faX,
+  faPhone,
+  faEnvelope,
+  faCircleUser,
   far,
   fab
 );
