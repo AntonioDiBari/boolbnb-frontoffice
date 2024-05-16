@@ -60,7 +60,7 @@ export default {
   unmounted() {
     // this.fillStore();
     // console.log(this.searchText);
-    console.log(store.addressSearch);
+    // console.log(store.addressSearch);
     clearTimeout(this.myTimeout);
   },
 };
