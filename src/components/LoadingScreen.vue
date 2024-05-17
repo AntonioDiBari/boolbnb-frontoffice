@@ -20,7 +20,7 @@ export default {
   top: 0;
   bottom: 0;
   text-align: center;
-  line-height: 100vh;
+  // line-height: 100vh;
 }
 .img {
   position: relative;
