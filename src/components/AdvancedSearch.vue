@@ -258,6 +258,7 @@ export default {
             )
           "
           class="btn btn-modal"
+          data-bs-dismiss="offcanvas"
         >
           Applica Filtri
         </button>
@@ -467,5 +468,22 @@ export default {
 
 .clickable {
   cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .input-group {
+    gap: 20px;
+  }
+
+  #offcanvasExample {
+    width: 100%;
+  }
+
+  .service {
+    justify-content: center;
+    span {
+      display: none;
+    }
+  }
 }
 </style>
