@@ -57,14 +57,12 @@ export default {
     searchbar() {
       let options = {
         searchOptions: {
-
           key: "SJwE3fU3HSTpU5zOFiK3YUQWEr7XG21I",
 
           language: "it-IT",
           limit: 5,
         },
         autocompleteOptions: {
-
           key: "SJwE3fU3HSTpU5zOFiK3YUQWEr7XG21I",
 
           language: "it-IT",
@@ -145,7 +143,7 @@ export default {
     </div>
     <div class="row">
       <div v-for="(service, index) in searchServices" class="col-2">
-        <div class="service d-flex justify-content-between mb-3">
+        <div class="service d-flex mb-3">
           <font-awesome-icon
             class="fs-4"
             :icon="`fa-solid ${store.services[service - 1].logo}`"
@@ -464,6 +462,7 @@ export default {
   padding: 10px;
   border-radius: 10px;
   color: #333;
+  gap: 20px;
 }
 
 .clickable {
