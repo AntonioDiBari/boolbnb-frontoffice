@@ -3,8 +3,8 @@ export default {
   methods: {
     getAbstract(string) {
       let newString;
-      if (string.length >= 15) {
-        newString = string.slice(0, 15) + "...";
+      if (string.length >= 25) {
+        newString = string.slice(0, 25) + "...";
         return newString;
       } else {
         return string;
@@ -34,8 +34,8 @@ export default {
           />
           <div class="card-body">
             <h4 class="text-light">{{ getAbstract(apartment.title_desc) }}</h4>
-            <!-- <span>{{ getAbstract(address) }}</span> -->
-            <span>{{ address }}</span>
+            <span>{{ getAbstract(address) }}</span>
+            <!-- <span>{{ address }}</span> -->
             <div class="details mt-2">
               <div class="detail">
                 <strong>Stanze: </strong> {{ apartment.n_rooms }}
