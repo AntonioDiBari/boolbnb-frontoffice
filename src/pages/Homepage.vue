@@ -20,14 +20,12 @@ export default {
     searchbar() {
       let options = {
         searchOptions: {
-
           key: "SJwE3fU3HSTpU5zOFiK3YUQWEr7XG21I",
 
           language: "it-IT",
           limit: 5,
         },
         autocompleteOptions: {
-
           key: "SJwE3fU3HSTpU5zOFiK3YUQWEr7XG21I",
           language: "it-IT",
         },
@@ -74,7 +72,7 @@ export default {
   <form class="d-flex flex-column gap-4" @submit.prevent="submitSearch">
     <h1 class="font align-self-center fw-bold">Trova il tuo alloggio ideale</h1>
     <div @keyup="onEditorChange($event)" id="searchbox"></div>
-    <div class="row mt-4 justify-content-between">
+    <div class="d-none row mt-4 justify-content-between">
       <div class="col-sm-3 flex-column">
         <label class="form-label me-3 fs-5" for="rooms">N° Stanze</label>
         <input
