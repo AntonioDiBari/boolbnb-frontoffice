@@ -17,21 +17,16 @@ export default {
 </script>
 
 <template>
-  <router-link
-    :to="{ name: 'apartment-detail', params: { slug: apartment.slug } }"
-  >
+  <router-link :to="{ name: 'apartment-detail', params: { slug: apartment.slug } }">
     <div class="card h-100">
       <div class="apartment-item h-100">
         <div class="apartment-content position-relative">
           <div v-if="apartment.sponsors[0]" class="fire position-absolute fs-1">
             <img src="../assets/logo.png" alt="" />
           </div>
-          <img
-            v-if="apartment.img"
-            :src="apartment.img"
-            class="apartment-image"
-            alt="..."
-          />
+          <div class="image-container">
+            <img v-if="apartment.img" :src="apartment.img" class="apartment-image" alt="..." />
+          </div>
           <div class="card-body">
             <h4 class="text-light">{{ getAbstract(apartment.title_desc) }}</h4>
             <span>{{ getAbstract(address) }}</span>
@@ -48,10 +43,7 @@ export default {
               </div>
             </div>
             <div class="services d-flex gap-3 mt-2">
-              <font-awesome-icon
-                v-for="service in apartment.services"
-                :icon="`fa-solid fa-${service.logo}`"
-              />
+              <font-awesome-icon v-for="service in apartment.services" :icon="`fa-solid fa-${service.logo}`" />
             </div>
           </div>
         </div>
@@ -82,6 +74,7 @@ export default {
 .apartment-content {
   padding: 20px;
   height: 100%;
+
   .fire {
     right: 30px;
     top: 15px;
@@ -89,10 +82,18 @@ export default {
   }
 }
 
+.image-container {
+  width: 100%;
+  height: 200px; // tutte stessa height
+  overflow: hidden;
+  border-radius: 8px;
+}
+
 .apartment-image {
   object-fit: cover;
   width: 100%;
-  height: 200px;
+  // height: 200px;
+  height: auto; //resp
   border-radius: 8px;
 }
 
@@ -108,10 +109,34 @@ export default {
 
 .details {
   display: flex;
+  flex-wrap: wrap; //resp
 }
 
 .detail {
   margin-right: 20px;
   font-size: 14px;
+  flex: 1 1 100%; //resp
+}
+
+.services {
+  //resp 
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Media queries per smartphone */
+@media (max-width: 576px) {
+  .apartment-content {
+    padding: 10px;
+  }
+
+  .detail {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .services {
+    justify-content: center;
+  }
 }
 </style>

@@ -128,10 +128,17 @@ export default {
     </div>
 
     <div class="row g-3 px-4 mt-2 justify-content-center">
-      <div v-for="service in apartment.services" :key="service" class="col-2">
+      <!-- <div v-for="service in apartment.services" :key="service" class="col-2">
         <div class="service d-flex gap-3">
           <font-awesome-icon class="align-self-center fs-4" :icon="`fa-solid fa-${service.logo}`" />
           <span class="align-self-center">{{ service.name }}</span>
+        </div>
+      </div> -->
+
+      <div v-for="service in apartment.services" :key="service" class="col-6 col-sm-4 col-md-3 mb-3">
+        <div class="service d-flex gap-3 align-items-center">
+          <font-awesome-icon class="fs-4" :icon="`fa-solid fa-${service.logo}`" />
+          <span>{{ service.name }}</span>
         </div>
       </div>
     </div>
@@ -235,6 +242,13 @@ export default {
     list-style-type: none;
     padding: 0;
     margin: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .service {
+    padding: 5px;
+    font-size: 14px;
   }
 }
 </style>
