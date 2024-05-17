@@ -13,20 +13,20 @@ export default {
     };
   },
   methods: {
-    fillStore() {
-      this.searchText = store.addressSearch;
-    },
+    // fillStore() {
+    //   this.searchText = store.addressSearch;
+    // },
 
     searchbar() {
       let options = {
         searchOptions: {
-          key: "SJwE3fU3HSTpU5zOFiK3YUQWEr7XG21I",
+          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
 
           language: "it-IT",
           limit: 5,
         },
         autocompleteOptions: {
-          key: "SJwE3fU3HSTpU5zOFiK3YUQWEr7XG21I",
+          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
           language: "it-IT",
         },
       };

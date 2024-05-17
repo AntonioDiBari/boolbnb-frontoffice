@@ -37,13 +37,13 @@ export default {
   components: { ApartmentCard, AdvancedSearch, LoadingScreen },
 
   methods: {
-    clearStore() {
-      (store.addressSearch = ""),
-        (store.roomsSearch = 1),
-        (store.bedsSearch = 1),
-        (store.bathroomsSearch = 1),
-        (store.rangeSearch = 20);
-    },
+    // clearStore() {
+    //   (store.addressSearch = ""),
+    //     (store.roomsSearch = 1),
+    //     (store.bedsSearch = 1),
+    //     (store.bathroomsSearch = 1),
+    //     (store.rangeSearch = 20);
+    // },
 
     fetchApartmentsFirst() {
       axios
@@ -51,7 +51,7 @@ export default {
           params: {
             beds: store.bedsSearch ?? 1,
             rooms: store.roomsSearch ?? 1,
-            services: [],
+            services: store.servicesSearch ?? [],
             address: store.addressSearch ?? "",
             range: store.rangeSearch ?? 20,
           },
@@ -59,6 +59,11 @@ export default {
         .then((response) => {
           this.apartments = response.data.result;
           this.addresses = response.data.addresses;
+          if (this.apartments.length > 0) {
+            this.isLoading = false;
+          } else {
+            this.isLoading = true;
+          }
         });
     },
 
@@ -69,6 +74,10 @@ export default {
       searchRooms,
       searchServices
     ) {
+      store.bedsSearch = searchBeds;
+      store.roomsSearch = searchRooms;
+      store.addressSearch = searchText;
+      store.rangeSearch = searchRange;
       axios
         .get(api.baseUrl + "apartments", {
           params: {
@@ -92,14 +101,14 @@ export default {
     this.fetchApartmentsFirst();
   },
 
-  mounted() {
-    this.myTimeout = setTimeout(() => {
-      this.isLoading = false;
-    }, 6000);
-  },
+  // mounted() {
+  //   this.myTimeout = setTimeout(() => {
+  //     this.isLoading = false;
+  //   }, 6000);
+  // },
 
   unmounted() {
-    this.clearStore();
+    // this.clearStore();
     clearTimeout(this.myTimeout);
   },
 };
@@ -108,23 +117,48 @@ export default {
 <template>
   <!-- <h1></h1> -->
   <loading-screen v-if="isLoading" />
-  <advanced-search @search="fetchApartments" />
-
-  <h2 class="page-title mb-4">Lista Appartamenti</h2>
-  <div v-if="apartments.length != 0" class="row g-3">
-    <div v-for="(apartment, index) in apartments" class="col-4 col-full">
-      <ApartmentCard
-        :key="apartment.id"
-        :apartment="apartment"
-        :address="addresses[index]"
-      />
+  <div class="position-relative">
+    <div class="navigation position-absolute">
+      <routerLink :to="{ name: 'homepage' }"
+        ><font-awesome-icon icon="fa-solid fa-reply" class="arrow-navigation"
+      /></routerLink>
     </div>
+    <advanced-search @search="fetchApartments" />
+    <h2 class="page-title mb-4">Lista Appartamenti</h2>
+    <div v-if="apartments.length != 0" class="row g-3">
+      <div v-for="(apartment, index) in apartments" class="col-4 col-full">
+        <ApartmentCard
+          :key="apartment.id"
+          :apartment="apartment"
+          :address="addresses[index]"
+        />
+      </div>
+    </div>
+    <div class="text-center mt-5 fs-4" v-else>Nessun risultato trovato</div>
   </div>
-  <div class="text-center mt-5 fs-4" v-else>Nessun risultato trovato</div>
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/partials/_variables.scss" as *;
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 60px;
+  top: 0;
+  left: -60px;
+  border-radius: 50%;
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+    transition: 0.5s;
+  }
+  .arrow-navigation {
+    width: 100%;
+    color: var(--main-color);
+    font-size: 35px;
+  }
+}
 
 .page-title {
   font-size: 36px;

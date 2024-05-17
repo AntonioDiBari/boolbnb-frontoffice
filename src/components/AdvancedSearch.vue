@@ -26,7 +26,7 @@ export default {
       searchBeds: store.bedsSearch ?? 1,
       searchRooms: store.roomsSearch ?? 1,
       searchRange: store.rangeSearch ?? 20,
-      searchServices: [],
+      searchServices: store.servicesSearch ?? [],
       serviceIcons: {
         WiFi: faWifi,
         "Posto Macchina": faSquareParking,
@@ -57,13 +57,13 @@ export default {
     searchbar() {
       let options = {
         searchOptions: {
-          key: "SJwE3fU3HSTpU5zOFiK3YUQWEr7XG21I",
+          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
 
           language: "it-IT",
           limit: 5,
         },
         autocompleteOptions: {
-          key: "SJwE3fU3HSTpU5zOFiK3YUQWEr7XG21I",
+          key: "ONRDNhUryVFGib0NMGnBqiPEWGkuIQvI",
 
           language: "it-IT",
         },

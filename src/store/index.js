@@ -10,6 +10,7 @@ export const store = reactive({
   roomsSearch: 1,
   bedsSearch: 1,
   bathroomsSearch: 1,
+  servicesSearch: [],
   rangeSearch: 20,
   services: [
     {

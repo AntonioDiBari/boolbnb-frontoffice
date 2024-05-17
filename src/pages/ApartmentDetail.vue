@@ -106,19 +106,30 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container position-relative">
+    <div class="navigation position-absolute">
+      <routerLink :to="{ name: 'apartment-search' }"
+        ><font-awesome-icon icon="fa-solid fa-reply" class="arrow-navigation"
+      /></routerLink>
+    </div>
     <div class="header-apartment px-4 mb-4">
       <h1 class="page-title">{{ apartment.title_desc }}</h1>
       <p>
         <strong><font-awesome-icon icon="fa-solid fa-location-dot" /></strong>
         {{ address[0] }}
       </p>
-      <h5 class="fs-4 m-1">Proprietario: </h5>
+      <h5 class="fs-4 m-1">Proprietario:</h5>
       <p class="fs-5 m-1" v-if="apartment.user">
         {{ apartment.user.name }} {{ apartment.user.surname }}
       </p>
-      <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-        data-bs-whatever="@getbootstrap" @click="this.resetSuccess()">
+      <button
+        type="button"
+        class="btn btn-primary m-1"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+        data-bs-whatever="@getbootstrap"
+        @click="this.resetSuccess()"
+      >
         Contatta
       </button>
     </div>
@@ -135,9 +146,16 @@ export default {
         </div>
       </div> -->
 
-      <div v-for="service in apartment.services" :key="service" class="col-6 col-sm-4 col-md-3 mb-3">
+      <div
+        v-for="service in apartment.services"
+        :key="service"
+        class="col-6 col-sm-4 col-md-3 mb-3"
+      >
         <div class="service d-flex gap-3 align-items-center">
-          <font-awesome-icon class="fs-4" :icon="`fa-solid fa-${service.logo}`" />
+          <font-awesome-icon
+            class="fs-4"
+            :icon="`fa-solid fa-${service.logo}`"
+          />
           <span>{{ service.name }}</span>
         </div>
       </div>
@@ -152,33 +170,63 @@ export default {
       <div id="map-div"></div>
     </div>
   </div>
-  <div id="staticBackdrop" data-bs-backdrop="static" class="modal fade" tabindex="-1">
+  <div
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    class="modal fade"
+    tabindex="-1"
+  >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div v-if="!success" class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">
             Nuovo messaggio
           </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
         </div>
         <form>
           <div v-if="!success" class="modal-body">
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Mail:</label>
-              <input type="email" class="form-control" id="recipient-name" v-model="email" required />
+              <input
+                type="email"
+                class="form-control"
+                id="recipient-name"
+                v-model="email"
+                required
+              />
               <div v-if="errors.email">Inserisci un indirzzo email valido</div>
             </div>
             <div class="mb-3">
-              <label for="message-text" class="col-form-label">Messaggio:</label>
-              <textarea class="form-control" id="message-text" v-model="body" required></textarea>
+              <label for="message-text" class="col-form-label"
+                >Messaggio:</label
+              >
+              <textarea
+                class="form-control"
+                id="message-text"
+                v-model="body"
+                required
+              ></textarea>
               <div v-if="errors.body">Il corpo del messaggio è richiesto</div>
             </div>
           </div>
           <div v-if="!success" class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
               Chiudi
             </button>
-            <button @click="this.sendContactForm()" type="button" class="btn btn-primary">
+            <button
+              @click="this.sendContactForm()"
+              type="button"
+              class="btn btn-primary"
+            >
               Invia
             </button>
           </div>
@@ -200,6 +248,25 @@ export default {
 .container {
   padding-top: 20px;
   color: black;
+  .navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    top: 0;
+    left: -60px;
+    border-radius: 50%;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.2);
+      transition: 0.5s;
+    }
+    .arrow-navigation {
+      width: 100%;
+      color: var(--main-color);
+      font-size: 35px;
+    }
+  }
 }
 
 .service {
