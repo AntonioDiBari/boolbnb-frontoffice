@@ -9,6 +9,7 @@ export default {
     return {
       api,
       images: [],
+      addresses: [],
       sponsoredApartments: [],
       activeImg: 0,
       autoplay: false,
@@ -44,19 +45,20 @@ export default {
 
     fetchApartments() {
       axios.get(`${api.baseUrl}apartment-sponsor`).then((response) => {
-        if (response.data.result && Array.isArray(response.data.result.data)) {
+        if (response.data.result && Array.isArray(response.data.result)) {
           // let filteredApartments = response.data.result.data.filter(
           //   (apartment) => apartment.img && apartment.sponsored
           // );
           // filteredApartments = response.data.result.data.slice(0, 10);
 
-          this.images = response.data.result.data.map(function (apartment) {
+          this.images = response.data.result.map(function (apartment) {
             return [apartment.img, apartment.title_desc, apartment.slug];
           });
+          this.addresses = response.data.addresses;
           this.images = this.images.filter(
             (image) => image[0] != "https://placehold.co/600x400"
           );
-          this.images = this.images.slice(0, 9);
+          // this.images = this.images.slice(0, 9);
           // this.sponsoredApartments = response.data.result.data;
         } else {
           console.error("formato immagine non valido");
@@ -93,6 +95,14 @@ export default {
           @mouseover="stopAutoPlay()"
           @mouseleave="setAutoPlay()"
         >
+          <div class="info-absolute position-absolute">
+            <h4 v-if="images.length > 0">
+              <strong>{{ images[activeImg][1] }}</strong>
+            </h4>
+            <p v-if="images.length > 0">
+              <strong>{{ addresses[activeImg] }}</strong>
+            </p>
+          </div>
           <div class="item">
             <router-link
               :to="{
@@ -100,17 +110,14 @@ export default {
                 params: { slug: images[activeImg][2] },
               }"
             >
-              <img
-                :src="images[activeImg][0]"
-                alt="immagine"
-              />
+              <img :src="images[activeImg][0]" alt="immagine" />
               <div class="overlay">
                 {{ images[activeImg][1] }}
               </div>
             </router-link>
           </div>
 
-          <div class="thumbs" :style="{ '--thumb-count': images.length }">
+          <!-- <div class="thumbs" :style="{ '--thumb-count': images.length }">
             <div class="prev" @click="prevSlide"></div>
             <div class="next" @click="nextSlide"></div>
 
@@ -125,7 +132,7 @@ export default {
                 last: index === images.length - 1,
               }"
             />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -141,6 +148,17 @@ export default {
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.512);
   position: relative;
+  overflow: hidden;
+
+  .info-absolute {
+    left: 0;
+    top: 0;
+    z-index: 1;
+    background-color: rgba(128, 128, 128, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-bottom-right-radius: 10px;
+  }
 }
 
 .item {
@@ -164,45 +182,45 @@ export default {
   image-rendering: auto;
 }
 
-.item .text {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  text-align: right;
-  color: white;
-}
+// .item .text {
+//   position: absolute;
+//   right: 20px;
+//   bottom: 20px;
+//   text-align: right;
+//   color: white;
+// }
 
-.thumbs {
-  float: left;
-  width: 120px;
-  background: #000;
-  position: relative;
-  font-size: 0;
-  border-radius: 0 20px 20px 0;
-}
+// .thumbs {
+//   float: left;
+//   width: 120px;
+//   background: #000;
+//   position: relative;
+//   font-size: 0;
+//   border-radius: 0 20px 20px 0;
+// }
 
-.thumb {
-  height: calc(100% / var(--thumb-count));
+// .thumb {
+//   height: calc(100% / var(--thumb-count));
 
-  width: 120px;
+//   width: 120px;
 
-  object-fit: cover;
+//   object-fit: cover;
 
-  opacity: 0.5;
-}
+//   opacity: 0.5;
+// }
 
-.thumb img {
-  width: 100%;
-  height: 100%;
+// .thumb img {
+//   width: 100%;
+//   height: 100%;
 
-  object-fit: cover;
-  image-rendering: auto;
-}
+//   object-fit: cover;
+//   image-rendering: auto;
+// }
 
-.thumb.active {
-  border: 2px solid #ccc;
-  opacity: 1;
-}
+// .thumb.active {
+//   border: 2px solid #ccc;
+//   opacity: 1;
+// }
 
 .first {
   border-radius: 0 20px 0 0;
@@ -212,23 +230,23 @@ export default {
   border-radius: 0 0 20px 0;
 }
 
-.prev,
-.next {
-  width: 20px;
-  height: 20px;
-  margin: 10px 0;
-  border-radius: 50%;
-  background: #ccc;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
-  cursor: pointer;
-  z-index: 999;
-}
+// .prev,
+// .next {
+//   width: 20px;
+//   height: 20px;
+//   margin: 10px 0;
+//   border-radius: 50%;
+//   background: #ccc;
+//   position: absolute;
+//   left: 50%;
+//   transform: translate(-50%);
+//   cursor: pointer;
+//   z-index: 999;
+// }
 
-.next {
-  bottom: 0;
-}
+// .next {
+//   bottom: 0;
+// }
 
 /*
 EXTRA: in questo esempio gli accordion vengono creati
@@ -236,53 +254,53 @@ usando 2 bordi di un quadratino ruotato di 45 gradi
 In una versione base si possono usare delle icone
 oppure i caratteri ∧ (&and;) e ∨ (&or;)
  */
-.prev::after {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-top: 1px solid black;
-  border-right: 1px solid black;
-  display: block;
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%) rotate(-45deg);
-}
+// .prev::after {
+//   content: "";
+//   width: 10px;
+//   height: 10px;
+//   border-top: 1px solid black;
+//   border-right: 1px solid black;
+//   display: block;
+//   position: absolute;
+//   top: 35%;
+//   left: 50%;
+//   transform: translate(-50%) rotate(-45deg);
+// }
 
-.next::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-top: 1px solid black;
-  border-right: 1px solid black;
-  display: block;
-  position: absolute;
-  bottom: 35%;
-  left: 50%;
-  transform: translate(-50%) rotate(135deg);
-}
+// .next::before {
+//   content: "";
+//   width: 10px;
+//   height: 10px;
+//   border-top: 1px solid black;
+//   border-right: 1px solid black;
+//   display: block;
+//   position: absolute;
+//   bottom: 35%;
+//   left: 50%;
+//   transform: translate(-50%) rotate(135deg);
+// }
 
-.item .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 20px 0 0 20px;
-  font-size: 24px;
-  font-weight: bold;
-}
+// .item .overlay {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(0, 0, 0, 0.3);
+//   color: white;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   opacity: 1;
+//   transition: opacity 0.3s ease;
+//   border-radius: 20px 0 0 20px;
+//   font-size: 24px;
+//   font-weight: bold;
+// }
 
-.item:hover .overlay {
-  opacity: 1;
-}
+// .item:hover .overlay {
+//   opacity: 1;
+// }
 @media (max-width: 576px) {
   .thumbs {
     display: none;
