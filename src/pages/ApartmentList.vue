@@ -112,7 +112,7 @@ export default {
 
   <h2 class="page-title mb-4">Lista Appartamenti</h2>
   <div v-if="apartments.length != 0" class="row g-3">
-    <div v-for="(apartment, index) in apartments" class="col-4">
+    <div v-for="(apartment, index) in apartments" class="col-4 col-full">
       <ApartmentCard
         :key="apartment.id"
         :apartment="apartment"
@@ -145,5 +145,12 @@ export default {
 
 .clickable {
   cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .col-full {
+    flex: 0 0 auto;
+    width: 100%;
+  }
 }
 </style>
