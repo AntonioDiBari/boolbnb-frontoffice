@@ -22,6 +22,7 @@ export default {
       store,
       api,
       allServices: [],
+      showBadge: false,
       searchText: store.addressSearch ?? "",
       searchBeds: store.bedsSearch ?? 1,
       searchRooms: store.roomsSearch ?? 1,
@@ -49,6 +50,9 @@ export default {
     axios.get(api.baseUrl + "apartment-service").then((response) => {
       this.allServices = response.data.result;
     });
+    if (store.servicesSearch.length > 0) {
+      this.showBadge = true;
+    }
   },
   mounted() {
     this.searchbar();
@@ -129,6 +133,7 @@ export default {
       <div id="searchbox"></div>
       <div>
         <button
+          @click="showBadge = false"
           class="btn btn-primary"
           type="button"
           data-bs-toggle="offcanvas"
@@ -141,19 +146,50 @@ export default {
         </button>
       </div>
     </div>
-    <div class="row">
-      <div v-for="(service, index) in searchServices" class="col-2">
+    <div v-if="showBadge == true" class="row row-services">
+      <div
+        v-for="(service, index) in searchServices"
+        class="col-6 col-sm-6 mb-3 col-md-2 col-lg-2"
+      >
         <div class="service d-flex mb-3">
           <font-awesome-icon
             class="fs-4"
             :icon="`fa-solid ${store.services[service - 1].logo}`"
           />
-          <span>{{ store.services[service - 1].name }}</span>
+          <strong>{{ store.services[service - 1].name }}</strong>
           <!-- <font-awesome-icon
             @click="$emit('search', searchText, deleteService(service.id))"
             class="align-self-center clickable"
             icon="fa-solid fa-x"
           /> -->
+        </div>
+      </div>
+      <div class="col-6 col-sm-6 mb-3 col-md-2 col-lg-2">
+        <div class="service d-flex">
+          <font-awesome-icon class="fs-4" icon="fa-solid fa-bed" />
+          <strong>N. Letti: </strong>
+          <span>{{ store.bedsSearch }}</span>
+        </div>
+      </div>
+      <div class="col-6 col-sm-6 mb-3 col-md-2 col-lg-2">
+        <div class="service d-flex">
+          <font-awesome-icon
+            class="fs-4"
+            icon="fa-solid fa-person-shelter"
+          /><strong>N. Stanze: </strong>
+          <span>
+            {{ store.roomsSearch }}
+          </span>
+        </div>
+      </div>
+      <div class="col-6 col-sm-6 mb-3 col-md-2 col-lg-2">
+        <div class="service d-flex">
+          <font-awesome-icon
+            class="fs-4"
+            icon="fa-solid fa-arrows-left-right-to-line"
+          />
+          <strong>Raggio: </strong>
+          <span> {{ store.rangeSearch }} km </span>
         </div>
       </div>
     </div>
@@ -224,23 +260,29 @@ export default {
             >Seleziona i servizi che desideri:</label
           >
 
-          <div class="col-6" v-for="service in allServices" :key="service.id">
-            <div v-show="this.allServices.length > 0" class="form-check">
-              <input
-                @click="handleServiceClick(service.id)"
-                class="form-check-input"
-                type="checkbox"
-                :id="service.id"
-                :value="service.id"
-                :checked="searchServices.includes(service.id) ?? false"
-              />
-
-              <label class="form-check-label" :for="service.id">
+          <div
+            class="col-6 d-flex align-items-center"
+            v-for="service in allServices"
+            :key="service.id"
+          >
+            <div v-show="this.allServices.length > 0" class="form-check d-flex">
+              <div class="align-self-center">
+                <input
+                  @click="handleServiceClick(service.id)"
+                  class="form-check-input"
+                  type="checkbox"
+                  :id="service.id"
+                  :value="service.id"
+                  :checked="searchServices.includes(service.id) ?? false"
+                />
                 <font-awesome-icon
                   v-if="getServiceIcon(service.name)"
                   :icon="getServiceIcon(service.name)"
                   class="me-2"
                 />
+              </div>
+
+              <label class="form-check-label" :for="service.id">
                 {{ service.name }}
               </label>
             </div>
@@ -255,7 +297,8 @@ export default {
               searchBeds,
               searchRooms,
               searchServices
-            )
+            ),
+              (showBadge = true)
           "
           class="btn btn-modal"
           data-bs-dismiss="offcanvas"
@@ -341,7 +384,7 @@ export default {
     }
 
     .range-value {
-      width: 65px;
+      width: 90px;
       text-align: end;
       line-height: 20px;
     }
@@ -463,7 +506,7 @@ export default {
   padding: 10px;
   border-radius: 10px;
   color: #333;
-  gap: 20px;
+  gap: 15px;
 }
 
 .clickable {
@@ -479,11 +522,14 @@ export default {
     width: 100%;
   }
 
-  .service {
-    justify-content: center;
-    span {
-      display: none;
-    }
+  .row-services {
+    display: none;
   }
+  // .service {
+  //   justify-content: center;
+  //   strong {
+  //     display: none;
+  //   }
+  // }
 }
 </style>
