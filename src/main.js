@@ -28,6 +28,9 @@ import {
   faCircleUser,
   faFire,
   faReply,
+  faBed,
+  faArrowsLeftRightToLine,
+  faPersonShelter,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
@@ -51,6 +54,9 @@ library.add(
   faCircleUser,
   faFire,
   faReply,
+  faBed,
+  faArrowsLeftRightToLine,
+  faPersonShelter,
   faX,
   far,
   fab
