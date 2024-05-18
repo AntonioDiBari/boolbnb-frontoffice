@@ -82,42 +82,39 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <h4 v-if="images.length > 0" class="text-center mb-5">
-          Alcuni appartamenti consigliati da noi:
-        </h4>
-        <div
-          v-if="images.length > 0"
-          class="slider-wrapper d-flex justify-content-center"
-          tabindex="0"
-          @mouseover="stopAutoPlay()"
-          @mouseleave="setAutoPlay()"
+  <div class="slider-container">
+    <!-- <div class="row justify-content-center"> -->
+    <h2>Alcuni appartamenti consigliati da noi:</h2>
+    <div class="slide-box">
+      <div
+        class="slide position-relative"
+        v-if="images.length > 0"
+        tabindex="0"
+        @mouseover="stopAutoPlay()"
+        @mouseleave="setAutoPlay()"
+      >
+        <div class="info-absolute position-absolute">
+          <h4 v-if="images.length > 0">
+            <strong>{{ images[activeImg][1] }}</strong>
+          </h4>
+          <p v-if="images.length > 0">
+            <strong>{{ addresses[activeImg] }}</strong>
+          </p>
+        </div>
+        <router-link
+          :to="{
+            name: 'apartment-detail',
+            params: { slug: images[activeImg][2] },
+          }"
         >
-          <div class="info-absolute position-absolute">
-            <h4 v-if="images.length > 0">
-              <strong>{{ images[activeImg][1] }}</strong>
-            </h4>
-            <p v-if="images.length > 0">
-              <strong>{{ addresses[activeImg] }}</strong>
-            </p>
-          </div>
-          <div class="item">
-            <router-link
-              :to="{
-                name: 'apartment-detail',
-                params: { slug: images[activeImg][2] },
-              }"
-            >
-              <img :src="images[activeImg][0]" alt="immagine" />
-              <div class="overlay">
-                {{ images[activeImg][1] }}
-              </div>
-            </router-link>
-          </div>
+          <img :src="images[activeImg][0]" alt="immagine" />
+          <!-- <div class="overlay">
+              {{ images[activeImg][1] }}
+            </div> -->
+        </router-link>
+      </div>
 
-          <!-- <div class="thumbs" :style="{ '--thumb-count': images.length }">
+      <!-- <div class="thumbs" :style="{ '--thumb-count': images.length }">
             <div class="prev" @click="prevSlide"></div>
             <div class="next" @click="nextSlide"></div>
 
@@ -133,54 +130,83 @@ export default {
               }"
             />
           </div> -->
-        </div>
-      </div>
     </div>
   </div>
+  <!-- </div> -->
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/general.scss";
 
-.slider-wrapper {
-  height: 500px;
-
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.512);
-  position: relative;
-  overflow: hidden;
-
-  .info-absolute {
-    left: 0;
-    top: 0;
+.slider-container {
+  height: calc(100vh - 145px);
+  h2 {
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: aliceblue;
+    box-shadow: 0px 0px 4px 2px aliceblue;
+    position: relative;
     z-index: 1;
-    background-color: rgba(128, 128, 128, 0.5);
-    color: white;
-    padding: 5px 10px;
-    border-bottom-right-radius: 10px;
+  }
+
+  .slide-box {
+    height: calc(100% - 70px);
+    padding: 10px 18rem 100px 18rem;
+    .slide {
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.512);
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .info-absolute {
+      left: 0;
+      top: 0;
+      z-index: 1;
+      background-color: rgba(128, 128, 128, 0.5);
+      color: white;
+      padding: 5px 10px;
+      border-bottom-right-radius: 10px;
+    }
   }
 }
 
-.item {
-  float: left;
-  flex-grow: 1;
-  object-fit: cover;
+// .slider-wrapper {
+//   height: 500px;
 
-  position: relative;
-  cursor: pointer;
-}
+//   border-radius: 20px;
+//   box-shadow: 0 0 20px rgba(0, 0, 0, 0.512);
+//   position: relative;
+//   overflow: hidden;
+// }
 
-.item img {
-  width: 880px;
-  height: 100%;
+// .item {
+//   object-fit: cover;
 
-  object-fit: cover;
-  // object-position: center;
+//   position: relative;
+//   cursor: pointer;
+// }
 
-  border-radius: 20px 0 0 20px;
-  cursor: pointer;
-  image-rendering: auto;
-}
+// .item img {
+//   width: 880px;
+//   height: 100%;
+
+//   object-fit: cover;
+//   // object-position: center;
+
+//   border-radius: 20px 0 0 20px;
+//   cursor: pointer;
+//   image-rendering: auto;
+// }
 
 // .item .text {
 //   position: absolute;
@@ -222,13 +248,13 @@ export default {
 //   opacity: 1;
 // }
 
-.first {
-  border-radius: 0 20px 0 0;
-}
+// .first {
+//   border-radius: 0 20px 0 0;
+// }
 
-.last {
-  border-radius: 0 0 20px 0;
-}
+// .last {
+//   border-radius: 0 0 20px 0;
+// }
 
 // .prev,
 // .next {
@@ -301,14 +327,32 @@ oppure i caratteri ∧ (&and;) e ∨ (&or;)
 // .item:hover .overlay {
 //   opacity: 1;
 // }
-@media (max-width: 576px) {
-  .thumbs {
-    display: none;
+@media screen and (max-width: 576px) {
+  .slider-container {
+    h2 {
+      height: 60px;
+      font-size: 1.2rem;
+      padding: 0 1rem;
+    }
+    .slide-box {
+      padding: 1rem 10px 4rem 10px;
+      .info-absolute {
+        h4 {
+          font-size: 1rem;
+        }
+        p {
+          font-size: 0.8rem;
+        }
+      }
+    }
   }
+  // .thumbs {
+  //   display: none;
+  // }
 
-  .item img {
-    border-radius: 20px;
-    object-fit: fill;
-  }
+  // .item img {
+  //   border-radius: 20px;
+  //   object-fit: fill;
+  // }
 }
 </style>

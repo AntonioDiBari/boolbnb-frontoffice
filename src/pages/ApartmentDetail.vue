@@ -106,7 +106,7 @@ export default {
 </script>
 
 <template>
-  <div class="container position-relative">
+  <div class="container main-container position-relative py-5">
     <div class="navigation position-absolute">
       <routerLink :to="{ name: 'apartment-search' }"
         ><font-awesome-icon icon="fa-solid fa-reply" class="arrow-navigation"
@@ -149,7 +149,7 @@ export default {
       <div
         v-for="service in apartment.services"
         :key="service"
-        class="col-6 col-sm-4 col-md-3 mb-3"
+        class="col-6 col-sm-6 col-md-2 col-lg-2 mb-3"
       >
         <div class="service d-flex gap-3 align-items-center">
           <font-awesome-icon
@@ -248,13 +248,16 @@ export default {
 .container {
   padding-top: 20px;
   color: black;
+  .col {
+    width: calc(100% / 6);
+  }
   .navigation {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 60px;
     width: 60px;
-    top: 0;
+    top: 50px;
     left: -60px;
     border-radius: 50%;
     &:hover {

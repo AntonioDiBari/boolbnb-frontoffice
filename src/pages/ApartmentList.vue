@@ -117,7 +117,7 @@ export default {
 <template>
   <!-- <h1></h1> -->
   <loading-screen v-if="isLoading" />
-  <div class="position-relative">
+  <div class="container main-container position-relative py-5">
     <div class="navigation position-absolute">
       <routerLink :to="{ name: 'homepage' }"
         ><font-awesome-icon icon="fa-solid fa-reply" class="arrow-navigation"
@@ -146,7 +146,7 @@ export default {
   align-items: center;
   height: 60px;
   width: 60px;
-  top: 0;
+  top: 50px;
   left: -60px;
   border-radius: 50%;
   &:hover {

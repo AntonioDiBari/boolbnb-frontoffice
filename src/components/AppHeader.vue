@@ -13,7 +13,9 @@ export default {
 
 <template>
   <header>
-    <div class="container d-flex justify-content-between align-items-center">
+    <div
+      class="container h-100 d-flex justify-content-between align-items-center"
+    >
       <div class="d-flex">
         <router-link :to="{ name: 'homepage' }">
           <div class="logo-box d-flex">
@@ -44,6 +46,8 @@ header {
   background-color: var(--main-color);
   box-shadow: 0px -2px 3px 4px var(--main-color);
   background: linear-gradient(to top, var(--main-color), var(--gray));
+  position: relative;
+  z-index: 1;
   .title {
     font-size: 60px;
     font-weight: bold;
@@ -53,7 +57,7 @@ header {
   }
 
   .logo-box {
-    height: 120px;
+    height: 100px;
     aspect-ratio: 1;
 
     img {
@@ -89,7 +93,7 @@ header {
       text-shadow: 0 0 2px;
     }
     .logo-box {
-      height: 120px;
+      height: 90px;
       aspect-ratio: 1;
 
       img {

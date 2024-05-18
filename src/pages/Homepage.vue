@@ -69,60 +69,72 @@ export default {
 
 <template>
   <loading-screen v-if="isLoading" />
-  <form class="d-flex flex-column gap-4" @submit.prevent="submitSearch">
-    <h1 class="font align-self-center fw-bold">Trova il tuo alloggio ideale</h1>
-    <div @keyup="onEditorChange($event)" id="searchbox"></div>
-    <div class="d-none row mt-4 justify-content-between">
-      <div class="col-sm-3 flex-column">
-        <label class="form-label me-3 fs-5" for="rooms">N° Stanze</label>
-        <input
-          v-model="store.roomsSearch"
-          class="form-control"
-          type="number"
-          name="rooms"
-          id="rooms"
-          min="1"
-          max="255"
-        />
+  <div class="main-container position-relative">
+    <div class="container">
+      <div class="jumbotron position-absolute z-0">
+        <img src="../assets/jumbotron.jpg" alt="" />
       </div>
-      <div class="col-sm-3 flex-column">
-        <label class="form-label me-3 fs-5" for="beds">N° Letti</label>
-        <input
-          v-model="store.bedsSearch"
-          class="form-control"
-          type="number"
-          name="beds"
-          id="beds"
-          min="1"
-          max="255"
-        />
-      </div>
-      <div class="col-sm-3 flex-column">
-        <label class="form-label me-3 fs-5" for="bagni">N° Bagni</label>
-        <input
-          class="form-control"
-          v-model="store.bathroomsSearch"
-          type="number"
-          name="bagni"
-          id="bagni"
-          min="1"
-          max="255"
-        />
-      </div>
-      <div class="input-range col-sm-3 flex-column gap-2 mb-2">
-        <label for="range" class="form-label fs-5">Raggio di ricerca</label>
-        <input
-          v-model="store.rangeSearch"
-          type="range"
-          class="form-range m-0"
-          min="1"
-          max="100"
-          step="1"
-          id="range"
-          value="20"
-        />
-        <!-- *************** Numero dinamico input range ***************** -->
-        <!-- <input
+      <form
+        class="d-flex flex-column justify-content-center align-items-center gap-4"
+        @submit.prevent="submitSearch"
+      >
+        <h1 class="display-5 fw-bold z-1">Trova il tuo alloggio ideale</h1>
+        <div
+          @keyup="onEditorChange($event)"
+          class="searchbox"
+          id="searchbox"
+        ></div>
+        <div class="d-none row mt-4 justify-content-between">
+          <div class="col-sm-3 flex-column">
+            <label class="form-label me-3 fs-5" for="rooms">N° Stanze</label>
+            <input
+              v-model="store.roomsSearch"
+              class="form-control"
+              type="number"
+              name="rooms"
+              id="rooms"
+              min="1"
+              max="255"
+            />
+          </div>
+          <div class="col-sm-3 flex-column">
+            <label class="form-label me-3 fs-5" for="beds">N° Letti</label>
+            <input
+              v-model="store.bedsSearch"
+              class="form-control"
+              type="number"
+              name="beds"
+              id="beds"
+              min="1"
+              max="255"
+            />
+          </div>
+          <div class="col-sm-3 flex-column">
+            <label class="form-label me-3 fs-5" for="bagni">N° Bagni</label>
+            <input
+              class="form-control"
+              v-model="store.bathroomsSearch"
+              type="number"
+              name="bagni"
+              id="bagni"
+              min="1"
+              max="255"
+            />
+          </div>
+          <div class="input-range col-sm-3 flex-column gap-2 mb-2">
+            <label for="range" class="form-label fs-5">Raggio di ricerca</label>
+            <input
+              v-model="store.rangeSearch"
+              type="range"
+              class="form-range m-0"
+              min="1"
+              max="100"
+              step="1"
+              id="range"
+              value="20"
+            />
+            <!-- *************** Numero dinamico input range ***************** -->
+            <!-- <input
             class="input-number"
             type="number"
             for="range"
@@ -130,22 +142,37 @@ export default {
             max="100"
             :value="searchRange"
           /> -->
-        <div class="range-value">{{ store.rangeSearch }} Km</div>
-      </div>
+            <div class="range-value">{{ store.rangeSearch }} Km</div>
+          </div>
+        </div>
+        <router-link
+          :to="{ name: 'apartment-search' }"
+          class="hover-scale align-self-center fs-2 mb-5 z-1"
+        >
+          <div class="fs-4 btn btn-primary fw-bold">Cerca</div>
+        </router-link>
+      </form>
     </div>
-    <router-link
-      :to="{ name: 'apartment-search' }"
-      class="hover-scale align-self-center fs-2 mb-5"
-    >
-      <div class="btn btn-primary fw-bold">Cerca</div>
-    </router-link>
-  </form>
-  <app-slider />
+    <app-slider />
+  </div>
 </template>
 
 <style lang="scss" scoped>
+.jumbotron {
+  height: calc(100vh - 120px);
+  left: 0;
+  right: 0;
+  z-index: 0;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
 form {
-  padding: 0 10rem;
+  height: calc(100vh - 120px);
+  .searchbox {
+    width: 50%;
+  }
 }
 .button {
   display: inline-block;
@@ -266,9 +293,20 @@ input[type="range"]:focus::-ms-fill-upper {
   background: #f7f7f7;
 }
 
-@media (max-width: 576px) {
+@media screen and (max-width: 576px) {
+  .jumbotron {
+    img {
+      object-fit: cover;
+    }
+  }
   form {
     padding: 0 1rem;
+    h1 {
+      font-size: 1.6rem;
+    }
+    .searchbox {
+      width: 100%;
+    }
   }
 }
 </style>
