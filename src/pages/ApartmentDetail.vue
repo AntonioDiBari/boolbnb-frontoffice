@@ -199,7 +199,7 @@ export default {
                 v-model="email"
                 required
               />
-              <div v-if="errors.email">Inserisci un indirzzo email valido</div>
+              <div v-if="errors.email">Inserisci un indirizzo email valido</div>
             </div>
             <div class="mb-3">
               <label for="message-text" class="col-form-label"
@@ -270,6 +270,14 @@ export default {
       font-size: 35px;
     }
   }
+}
+.modal-title {
+  color: var(--main-color);
+  font-weight: bold;
+}
+.col-form-label {
+  color: var(--main-color);
+  font-weight: bold;
 }
 
 .service {

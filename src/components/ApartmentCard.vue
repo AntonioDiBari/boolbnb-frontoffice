@@ -17,7 +17,9 @@ export default {
 </script>
 
 <template>
-  <router-link :to="{ name: 'apartment-detail', params: { slug: apartment.slug } }">
+  <router-link
+    :to="{ name: 'apartment-detail', params: { slug: apartment.slug } }"
+  >
     <div class="card h-100">
       <div class="apartment-item h-100">
         <div class="apartment-content position-relative">
@@ -25,11 +27,16 @@ export default {
             <img src="../assets/logo.png" alt="" />
           </div>
           <div class="image-container">
-            <img v-if="apartment.img" :src="apartment.img" class="apartment-image" alt="..." />
+            <img
+              v-if="apartment.img"
+              :src="apartment.img"
+              class="apartment-image"
+              alt="..."
+            />
           </div>
           <div class="card-body">
             <h4 class="text-light">{{ getAbstract(apartment.title_desc) }}</h4>
-            <span>{{ getAbstract(address) }}</span>
+            <span>{{ address }}</span>
             <!-- <span>{{ address }}</span> -->
             <div class="details mt-2">
               <div class="detail">
@@ -43,7 +50,10 @@ export default {
               </div>
             </div>
             <div class="services d-flex gap-3 mt-2">
-              <font-awesome-icon v-for="service in apartment.services" :icon="`fa-solid fa-${service.logo}`" />
+              <font-awesome-icon
+                v-for="service in apartment.services"
+                :icon="`fa-solid fa-${service.logo}`"
+              />
             </div>
           </div>
         </div>
@@ -119,7 +129,7 @@ export default {
 }
 
 .services {
-  //resp 
+  //resp
   display: flex;
   flex-wrap: wrap;
 }
