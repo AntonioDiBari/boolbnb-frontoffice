@@ -25,7 +25,7 @@ export default {
               </li>
               <li class="me-3">
                 <a href="https://twitter.com/i/flow/login"
-                  ><font-awesome-icon icon="fa-brands fa-twitter"
+                  ><font-awesome-icon icon="fa-brands fa-x-twitter"
                 /></a>
               </li>
               <li class="me-3">
@@ -35,7 +35,7 @@ export default {
               </li>
               <li>
                 <a href="https://www.skype.com/it/"
-                  ><font-awesome-icon icon="fa-brands fa-x-twitter"
+                  ><font-awesome-icon icon="fa-brands fa-skype"
                 /></a>
               </li>
             </ul>
