@@ -99,6 +99,9 @@ export default {
         this.searchServices = this.searchServices.filter(
           (elemento) => elemento !== id
         );
+        store.servicesSearch = store.servicesSearch.filter(
+          (elemento) => elemento !== id
+        );
       }
     },
 
